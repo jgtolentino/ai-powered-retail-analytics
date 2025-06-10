@@ -10,6 +10,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "vitest",
     "test:azure": "node scripts/test-azure-openai.js",
+    "test:supabase": "node scripts/test-supabase.js",
     "verify": "npm run lint && npm run test && npm run build",
     "deploy": "npm run build && vercel --prod"
   },
