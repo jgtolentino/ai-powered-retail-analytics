@@ -34,10 +34,10 @@ export default function AIGenie() {
   }, [messages])
 
   const suggestedQuestions = [
-    { icon: TrendingUp, text: "What are our top selling products this week?" },
-    { icon: Users, text: "Show me customer demographics breakdown" },
-    { icon: Package, text: "Which brands are performing best?" },
-    { icon: Sparkles, text: "Predict next month's sales trends" }
+    { icon: TrendingUp, text: "What are our top selling brands this week?" },
+    { icon: Users, text: "Show me customer age and gender demographics" },
+    { icon: Package, text: "Which payment methods are most popular?" },
+    { icon: Sparkles, text: "Analyze facial recognition device patterns" }
   ]
 
   const handleSend = async () => {
@@ -72,13 +72,15 @@ export default function AIGenie() {
       if (input.toLowerCase().includes('sales') || input.toLowerCase().includes('revenue')) {
         const { data: transactions } = await supabase
           .from('transactions')
-          .select('total_amount')
+          .select('total_amount, device_id, customer_age, customer_gender, store_location, payment_method')
           .order('created_at', { ascending: false })
           .limit(100)
         
         if (transactions) {
           const totalRecent = transactions.reduce((sum, t) => sum + (t.total_amount || 0), 0)
-          contextData += `Recent sales data: ₱${totalRecent.toLocaleString()} from last 100 transactions. `
+          const uniqueDevices = new Set(transactions.map(t => t.device_id)).size
+          const avgAge = transactions.reduce((sum, t) => sum + (t.customer_age || 0), 0) / transactions.length
+          contextData += `Recent sales data: ₱${totalRecent.toLocaleString()} from last 100 transactions. ${uniqueDevices} unique devices/customers detected. Average customer age: ${avgAge.toFixed(1)} years. `
         }
       }
 
@@ -87,7 +89,9 @@ export default function AIGenie() {
         {
           role: 'system',
           content: `You are an AI assistant specialized in retail analytics for the Philippine market. 
-          You have access to a database with brands, stores, products, customers, and transactions data.
+          You have access to a database with brands, stores, products, and transactions data.
+          The system uses facial recognition devices (device_id) to track unique customers.
+          Each transaction includes customer demographics (age, gender), store location, and payment method.
           ${contextData}
           Provide insights in a clear, actionable format. Use Philippine peso (₱) for currency.
           Be specific with numbers and percentages when possible.`

@@ -35,7 +35,7 @@ export default function RetailDashboard() {
       // Fetch key metrics
       const { data: transactions, error: transError } = await supabase
         .from('transactions')
-        .select('total_amount, customer_id, created_at')
+        .select('total_amount, device_id, customer_age, customer_gender, created_at, store_location')
         .order('created_at', { ascending: false })
         .limit(1000)
 
@@ -44,7 +44,7 @@ export default function RetailDashboard() {
       // Calculate metrics
       const totalRevenue = transactions?.reduce((sum, t) => sum + (t.total_amount || 0), 0) || 0
       const totalTransactions = transactions?.length || 0
-      const uniqueCustomers = new Set(transactions?.map(t => t.customer_id)).size
+      const uniqueDevices = new Set(transactions?.map(t => t.device_id)).size // Using device_id as unique customer identifier
       const avgTransactionValue = totalTransactions > 0 ? totalRevenue / totalTransactions : 0
 
       // Fetch top brands
@@ -86,7 +86,7 @@ export default function RetailDashboard() {
       setMetrics({
         totalRevenue,
         totalTransactions,
-        totalCustomers: uniqueCustomers,
+        totalCustomers: uniqueDevices, // Using unique devices as customer count
         avgTransactionValue,
         topBrands,
         salesByRegion,
@@ -157,7 +157,7 @@ export default function RetailDashboard() {
           trend="up"
         />
         <MetricCard
-          title="Active Customers"
+          title="Unique Devices"
           value={metrics?.totalCustomers.toLocaleString() || '0'}
           change={-2.4}
           icon={Users}
