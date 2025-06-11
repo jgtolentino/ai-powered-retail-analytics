@@ -1,6 +1,20 @@
 # 🎯 AI-Powered Retail Analytics Platform
 
-Enterprise-grade AI-powered retail analytics platform with Azure OpenAI integration for the Philippine market.
+Enterprise-grade AI-powered retail analytics platform with **Scout AI Chatbot** and Azure OpenAI integration for the Philippine market.
+
+## 🤖 Scout AI Chatbot Features
+
+- **🎯 Draggable Interface** - Move the AI assistant anywhere on screen
+- **👁️ Hide/Show Controls** - Complete visibility management with bottom corner toggle
+- **📊 Real-time Analysis** - Contextual insights from 18K+ transactions
+- **🏷️ Brand Intelligence** - TBWA vs competitor performance analysis
+- **🌏 Philippine Market Focus** - Regional trends and consumer behavior patterns
+- **💬 Natural Language** - Ask questions about retail data in plain English
+
+### Available on Pages:
+- `/overview` - Main dashboard with KPIs and insights
+- `/sales-explorer` - Transaction analysis and search
+- `/scout` - Advanced 4-panel analytics view
 
 ## 🚀 Master Deployment Plan - Quick Start
 
