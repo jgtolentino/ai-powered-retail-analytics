@@ -12,7 +12,8 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true,
+    open: '/overview', // Auto-open to the overview page
+    host: true, // Allow external connections
   },
   build: {
     outDir: 'dist',

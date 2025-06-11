@@ -67,6 +67,20 @@ async function checkSchema() {
       console.log('📄 Sample record:', brands[0])
     }
 
+    console.log('\n📊 TRANSACTION_ITEMS TABLE:')
+    const { data: transactionItems, error: itemsError } = await supabase
+      .from('transaction_items')
+      .select('*')
+      .limit(3)
+
+    if (itemsError) {
+      console.error('❌ Error:', itemsError.message)
+    } else if (transactionItems && transactionItems.length > 0) {
+      console.log('✅ Found transaction_items table')
+      console.log('🔤 Available columns:', Object.keys(transactionItems[0]).join(', '))
+      console.log('📄 Sample record:', transactionItems[0])
+    }
+
   } catch (error) {
     console.error('❌ Failed to check schema:', error.message)
   }

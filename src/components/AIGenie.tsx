@@ -208,12 +208,16 @@ export default function AIGenie() {
           {/* Input Area */}
           <div className="p-4 border-t">
             <div className="flex gap-2">
+              <label htmlFor="ai-chat-input" className="sr-only">Ask AI assistant about retail analytics</label>
               <input
+                id="ai-chat-input"
+                name="aiChatInput"
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ask about sales, customers, trends..."
+                autoComplete="off"
                 className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 disabled={isLoading}
               />
