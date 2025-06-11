@@ -3,13 +3,14 @@ import { FilterProvider } from '../context/FilterContext';
 import GlobalFilterBar from './shared/GlobalFilterBar';
 import SideNavigation from './shared/SideNavigation';
 import useAllTransactions, { Transaction } from '../hooks/useAllTransactions';
+import ScoutAIPanel from './scout/ScoutAIPanel';
 import { TrendingUp, Download, RefreshCw, Search, Calendar, DollarSign } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const SalesExplorer: React.FC = () => {
-  const { transactions, loading, error } = useAllTransactions();
+  const { transactions, loading, error, data } = useAllTransactions();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<'created_at' | 'total_amount'>('created_at');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
@@ -315,6 +316,9 @@ const SalesExplorer: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Scout AI Panel - Floating */}
+      <ScoutAIPanel data={data} />
     </FilterProvider>
   );
 };

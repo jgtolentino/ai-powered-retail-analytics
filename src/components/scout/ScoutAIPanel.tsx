@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { Button } from '../ui/button'
-import { Bot, Send, Loader2, X, Maximize2, Minimize2 } from 'lucide-react'
+import { Bot, Send, Loader2, X, Maximize2, Minimize2, Move, EyeOff } from 'lucide-react'
 import { callAzureOpenAI } from '@/lib/azure-openai/client'
 
 interface ScoutAIPanelProps {
@@ -32,7 +32,12 @@ export default function ScoutAIPanel({ data }: ScoutAIPanelProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [isExpanded, setIsExpanded] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
+  const [isHidden, setIsHidden] = useState(false)
+  const [position, setPosition] = useState({ x: 0, y: 16 }) // Will be set on mount
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const dragRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -41,6 +46,53 @@ export default function ScoutAIPanel({ data }: ScoutAIPanelProps) {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Set initial position on mount
+  useEffect(() => {
+    if (position.x === 0) {
+      setPosition({ x: window.innerWidth - 336, y: 16 })
+    }
+  }, [])
+
+  // Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true)
+    setDragStart({
+      x: e.clientX - position.x,
+      y: e.clientY - position.y
+    })
+  }
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging) return
+    
+    const newX = e.clientX - dragStart.x
+    const newY = e.clientY - dragStart.y
+    
+    // Keep within viewport bounds
+    const maxX = window.innerWidth - (isExpanded ? 400 : 320)
+    const maxY = window.innerHeight - (isExpanded ? 500 : 384)
+    
+    setPosition({
+      x: Math.max(0, Math.min(newX, maxX)),
+      y: Math.max(0, Math.min(newY, maxY))
+    })
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove)
+        document.removeEventListener('mouseup', handleMouseUp)
+      }
+    }
+  }, [isDragging, dragStart, position])
 
   // Generate context from current data
   const generateContext = () => {
@@ -161,9 +213,41 @@ export default function ScoutAIPanel({ data }: ScoutAIPanelProps) {
     setInput(query)
   }
 
-  if (isMinimized) {
+  // Show/hide toggle function
+  const toggleVisibility = () => {
+    if (isHidden) {
+      setIsHidden(false)
+      setIsMinimized(false) // Show as expanded when unhiding
+    } else {
+      setIsHidden(true)
+    }
+  }
+
+  // Hidden state - show only the corner toggle button
+  if (isHidden) {
     return (
       <div className="fixed bottom-4 right-4 z-50">
+        <Button
+          onClick={toggleVisibility}
+          className="bg-gray-600 hover:bg-gray-700 text-white rounded-full w-10 h-10 shadow-lg opacity-50 hover:opacity-100 transition-opacity"
+          title="Show Scout AI"
+        >
+          <Bot className="h-4 w-4" />
+        </Button>
+      </div>
+    )
+  }
+
+  if (isMinimized) {
+    return (
+      <div 
+        className="fixed z-50 cursor-move"
+        style={{ 
+          left: `${position.x}px`, 
+          top: `${position.y}px`
+        }}
+        onMouseDown={handleMouseDown}
+      >
         <Button
           onClick={() => setIsMinimized(false)}
           className="bg-black hover:bg-gray-800 text-white rounded-full w-14 h-14 shadow-lg"
@@ -175,13 +259,31 @@ export default function ScoutAIPanel({ data }: ScoutAIPanelProps) {
   }
 
   return (
-    <div className={`fixed ${isExpanded ? 'inset-4' : 'top-4 right-4 w-80 h-96'} z-50 bg-black text-white rounded-lg shadow-2xl border border-gray-800 flex flex-col`}>
+    <div 
+      ref={dragRef}
+      className={`fixed z-50 bg-black text-white rounded-lg shadow-2xl border border-gray-800 flex flex-col ${
+        isExpanded ? 'inset-4' : 'w-80 h-96'
+      }`}
+      style={isExpanded ? {} : { 
+        left: `${position.x}px`, 
+        top: `${position.y}px`
+      }}
+    >
       
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-800">
         <div className="flex items-center">
           <Bot className="h-5 w-5 mr-2 text-blue-400" />
           <h3 className="font-semibold">Scout AI</h3>
+          {!isExpanded && (
+            <div 
+              className="ml-2 cursor-move p-1 hover:bg-gray-800 rounded"
+              onMouseDown={handleMouseDown}
+              title="Drag to move"
+            >
+              <Move className="h-3 w-3 text-gray-400" />
+            </div>
+          )}
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -189,6 +291,7 @@ export default function ScoutAIPanel({ data }: ScoutAIPanelProps) {
             size="sm"
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-white hover:bg-gray-800 p-1"
+            title={isExpanded ? "Minimize" : "Expand"}
           >
             {isExpanded ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
           </Button>
@@ -197,8 +300,18 @@ export default function ScoutAIPanel({ data }: ScoutAIPanelProps) {
             size="sm"
             onClick={() => setIsMinimized(true)}
             className="text-white hover:bg-gray-800 p-1"
+            title="Minimize to icon"
           >
             <X className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleVisibility}
+            className="text-white hover:bg-gray-800 p-1"
+            title="Hide completely"
+          >
+            <EyeOff className="h-4 w-4" />
           </Button>
         </div>
       </div>

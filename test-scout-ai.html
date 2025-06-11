@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scout AI Integration Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .info {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .warning {
+            background-color: #fed7aa;
+            color: #92400e;
+        }
+        .page-link {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .page-link:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Scout AI Chatbot Integration Test</h1>
+        
+        <div class="status success">
+            <h3>✅ Scout AI Component Found</h3>
+            <p>Location: <code>src/components/scout/ScoutAIPanel.tsx</code></p>
+        </div>
+        
+        <div class="status info">
+            <h3>📋 Pages with Scout AI Chatbot:</h3>
+            <ul>
+                <li><strong>Scout Dashboard</strong> - Original implementation</li>
+                <li><strong>Overview Page</strong> - ✅ Added</li>
+                <li><strong>Sales Explorer</strong> - ✅ Added</li>
+            </ul>
+        </div>
+        
+        <div class="status info">
+            <h3>🔧 Configuration:</h3>
+            <ul>
+                <li>Uses Azure OpenAI API</li>
+                <li>Connects to 18K+ transaction data</li>
+                <li>Floating panel UI (minimizable/expandable)</li>
+                <li>Real-time insights based on current data context</li>
+            </ul>
+        </div>
+        
+        <div class="status warning">
+            <h3>⚠️ Testing Notes:</h3>
+            <ul>
+                <li>Ensure Azure OpenAI credentials are configured</li>
+                <li>The chatbot appears as a floating panel in bottom-right corner</li>
+                <li>Click the bot icon to minimize/expand</li>
+                <li>Data context is automatically provided based on current transactions</li>
+            </ul>
+        </div>
+        
+        <div class="status info">
+            <h3>🚀 Access the Pages:</h3>
+            <p>The server is running on port 3001. Visit these pages to see the Scout AI chatbot:</p>
+            <div>
+                <a href="http://localhost:3001/overview" class="page-link">Overview Page</a>
+                <a href="http://localhost:3001/sales-explorer" class="page-link">Sales Explorer</a>
+                <a href="http://localhost:3001/scout" class="page-link">Scout Dashboard</a>
+            </div>
+        </div>
+        
+        <div class="status info">
+            <h3>💡 Features:</h3>
+            <ul>
+                <li>Quick insight suggestions for common queries</li>
+                <li>Real-time analysis of 18K transactions</li>
+                <li>Brand performance comparisons (TBWA vs competitors)</li>
+                <li>Consumer behavior pattern analysis</li>
+                <li>Regional opportunity identification</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

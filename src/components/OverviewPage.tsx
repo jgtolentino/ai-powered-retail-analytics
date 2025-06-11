@@ -6,9 +6,13 @@ import KPICards from './retail/overview/KPICards';
 import DailyTrendsHeatmap from './retail/overview/DailyTrendsHeatmap';
 import BasketSummary from './retail/overview/BasketSummary';
 import BrandPerformance from './retail/overview/BrandPerformance';
+import ScoutAIPanel from './scout/ScoutAIPanel';
+import useAllTransactions from '../hooks/useAllTransactions';
 import { Store, Sparkles } from 'lucide-react';
 
 const OverviewPage: React.FC = () => {
+  const { data } = useAllTransactions();
+  
   return (
     <FilterProvider>
       <div className="min-h-screen bg-gray-50 flex">
@@ -80,6 +84,9 @@ const OverviewPage: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Scout AI Panel - Floating */}
+      <ScoutAIPanel data={data} />
     </FilterProvider>
   );
 };

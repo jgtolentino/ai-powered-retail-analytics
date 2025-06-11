@@ -1,8 +1,8 @@
 // Direct Azure OpenAI API implementation
-const AZURE_ENDPOINT = import.meta.env.AZURE_ENDPOINT || 'https://eastus.api.cognitive.microsoft.com/'
-const AZURE_API_KEY = import.meta.env.AZURE_OPENAI_API_KEY || '31119320b14e4ff4bccefa768f4adaa8'
-const AZURE_DEPLOYMENT = import.meta.env.AZURE_DEPLOYMENT_NAME || 'gpt-4o-deployment'
-const API_VERSION = import.meta.env.AZURE_API_VERSION || '2024-02-01'
+const AZURE_ENDPOINT = import.meta.env.VITE_AZURE_ENDPOINT || 'https://eastus.api.cognitive.microsoft.com/'
+const AZURE_API_KEY = import.meta.env.VITE_AZURE_OPENAI_API_KEY || '31119320b14e4ff4bccefa768f4adaa8'
+const AZURE_DEPLOYMENT = import.meta.env.VITE_AZURE_DEPLOYMENT_NAME || 'gpt-4o-deployment'
+const API_VERSION = import.meta.env.VITE_AZURE_API_VERSION || '2024-02-01'
 
 // Helper function to call Azure OpenAI with proper endpoint
 export async function callAzureOpenAI(messages: any[]) {
