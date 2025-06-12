@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { FilterProvider } from '../context/FilterContext';
 import GlobalFilterBar from './shared/GlobalFilterBar';
-import SideNavigation from './shared/SideNavigation';
 import useAllTransactions from '../hooks/useAllTransactions';
 import ScoutAIPanel from './scout/ScoutAIPanel';
 import { Users, Download, RefreshCw, TrendingUp, Activity, Target, BarChart3 } from 'lucide-react';
@@ -139,8 +138,7 @@ const ConsumerInsights: React.FC = () => {
 
   return (
     <FilterProvider>
-      <div className="min-h-screen bg-gray-50 flex">
-        <SideNavigation />
+      <div className="min-h-screen bg-gray-50">
         
         <div className="flex-1 flex flex-col">
           <GlobalFilterBar />

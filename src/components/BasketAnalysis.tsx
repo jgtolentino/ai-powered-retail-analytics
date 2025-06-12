@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { FilterProvider } from '../context/FilterContext';
 import GlobalFilterBar from './shared/GlobalFilterBar';
-import SideNavigation from './shared/SideNavigation';
 import useAllTransactions from '../hooks/useAllTransactions';
 import ScoutAIPanel from './scout/ScoutAIPanel';
 import { Package, Download, RefreshCw, BarChart3, Users, TrendingUp, ArrowRightLeft } from 'lucide-react';
@@ -110,8 +109,7 @@ const BasketAnalysis: React.FC = () => {
 
   return (
     <FilterProvider>
-      <div className="min-h-screen bg-gray-50 flex">
-        <SideNavigation />
+      <div className="min-h-screen bg-gray-50">
         
         <div className="flex-1 flex flex-col">
           <GlobalFilterBar />

@@ -1,7 +1,6 @@
 import React from 'react';
 import { FilterProvider } from '../context/FilterContext';
 import GlobalFilterBar from './shared/GlobalFilterBar';
-import SideNavigation from './shared/SideNavigation';
 import KPICards from './retail/overview/KPICards';
 import DailyTrendsHeatmap from './retail/overview/DailyTrendsHeatmap';
 import BasketSummary from './retail/overview/BasketSummary';
@@ -25,12 +24,9 @@ const OverviewPage: React.FC = () => {
   
   return (
     <FilterProvider>
-      <div className="min-h-screen bg-gray-50 flex">
-        {/* Side Navigation */}
-        <SideNavigation />
-        
+      <div className="min-h-screen bg-gray-50">
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex flex-col">
           {/* Global Filter Bar */}
           <GlobalFilterBar />
           

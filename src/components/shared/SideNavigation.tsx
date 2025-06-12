@@ -5,10 +5,7 @@ import {
   TrendingUp, 
   Package, 
   Users, 
-  Monitor, 
-  Settings,
   Store,
-  Brain,
   ChevronRight
 } from 'lucide-react';
 
@@ -45,35 +42,9 @@ const navigationItems: NavItem[] = [
     label: 'Consumer Insights',
     description: 'Demographics & behavior'
   },
-  {
-    href: '/device-health',
-    icon: Monitor,
-    label: 'Device Health',
-    description: 'Edge device monitoring'
-  },
-  {
-    href: '/brand-performance',
-    icon: Store,
-    label: 'Brand Performance',
-    description: 'TBWA vs competitors'
-  },
-  {
-    href: '/ai-assistant',
-    icon: Brain,
-    label: 'AI Console',
-    description: 'Comprehensive analytics workspace',
-    badge: 'PRO'
-  }
 ];
 
-const adminItems: NavItem[] = [
-  {
-    href: '/admin/logs',
-    icon: Settings,
-    label: 'System Logs',
-    description: 'Operations & audit'
-  }
-];
+const adminItems: NavItem[] = [];
 
 interface SideNavigationProps {
   className?: string;
