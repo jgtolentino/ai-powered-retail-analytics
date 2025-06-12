@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { FilterProvider } from '../context/FilterContext';
-import GlobalFilterBar from './shared/GlobalFilterBar';
-import SideNavigation from './shared/SideNavigation';
+import Layout from './Layout';
+import PageLayout from './PageLayout';
 import useAllTransactions, { Transaction } from '../hooks/useAllTransactions';
 import ScoutAIPanel from './scout/ScoutAIPanel';
 import { TrendingUp, Download, RefreshCw, Search, Calendar, DollarSign } from 'lucide-react';
@@ -92,83 +91,79 @@ const SalesExplorer: React.FC = () => {
 
   if (loading) {
     return (
-      <FilterProvider>
-        <div className="min-h-screen bg-gray-50 flex">
-          <SideNavigation />
-          <div className="flex-1 flex flex-col">
-            <GlobalFilterBar />
-            <div className="flex-1 p-6 flex items-center justify-center">
-              <div className="text-center">
-                <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                <div className="text-lg text-gray-600">Loading sales data...</div>
-                <div className="text-sm text-gray-500 mt-2">Processing {transactions.length} transactions...</div>
-              </div>
+      <Layout>
+        <PageLayout 
+          title={
+            <div className="flex items-center gap-3">
+              <TrendingUp className="h-8 w-8 text-blue-600" />
+              Sales Explorer
+            </div>
+          }
+          description="Transaction analysis and drill-down"
+        >
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+              <div className="text-lg text-gray-600">Loading sales data...</div>
+              <div className="text-sm text-gray-500 mt-2">Processing {transactions.length} transactions...</div>
             </div>
           </div>
-        </div>
-      </FilterProvider>
+        </PageLayout>
+      </Layout>
     );
   }
 
   if (error) {
     return (
-      <FilterProvider>
-        <div className="min-h-screen bg-gray-50 flex">
-          <SideNavigation />
-          <div className="flex-1 flex flex-col">
-            <GlobalFilterBar />
-            <div className="flex-1 p-6 flex items-center justify-center">
-              <div className="text-center">
-                <TrendingUp className="h-12 w-12 text-red-400 mx-auto mb-4" />
-                <div className="text-lg text-red-600">Error Loading Sales Data</div>
-                <div className="text-sm text-red-500 mt-2">Unable to process transaction data</div>
-              </div>
+      <Layout>
+        <PageLayout 
+          title={
+            <div className="flex items-center gap-3">
+              <TrendingUp className="h-8 w-8 text-red-600" />
+              Sales Explorer
+            </div>
+          }
+          description="Transaction analysis and drill-down"
+        >
+          <div className="flex items-center justify-center min-h-[400px]">
+            <div className="text-center">
+              <TrendingUp className="h-12 w-12 text-red-400 mx-auto mb-4" />
+              <div className="text-lg text-red-600">Error Loading Sales Data</div>
+              <div className="text-sm text-red-500 mt-2">Unable to process transaction data</div>
             </div>
           </div>
-        </div>
-      </FilterProvider>
+        </PageLayout>
+      </Layout>
     );
   }
 
   return (
-    <FilterProvider>
-      <div className="min-h-screen bg-gray-50 flex">
-        <SideNavigation />
-        
-        <div className="flex-1 flex flex-col">
-          <GlobalFilterBar />
-          
-          {/* Page Header */}
-          <div className="p-6 bg-white border-b border-gray-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-                  <TrendingUp className="h-8 w-8 text-blue-600" />
-                  Sales Explorer
-                </h1>
-                <p className="text-gray-600 mt-1">
-                  Transaction analysis and drill-down
-                  <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
-                    {transactions.length.toLocaleString()} transactions
-                  </span>
-                </p>
-              </div>
-              
-              <div className="flex gap-3">
-                <Button variant="outline" size="sm">
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Refresh
-                </Button>
-                <Button variant="outline" size="sm">
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
-                </Button>
-              </div>
-            </div>
+    <Layout>
+      <PageLayout 
+        title={
+          <div className="flex items-center gap-3">
+            <TrendingUp className="h-8 w-8 text-blue-600" />
+            Sales Explorer
+            <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
+              {transactions.length.toLocaleString()} transactions
+            </span>
           </div>
-          
-          {/* Content */}
-          <div className="flex-1 p-6 space-y-6">
+        }
+        description="Transaction analysis and drill-down"
+        actions={
+          <div className="flex gap-3">
+            <Button variant="outline" size="sm">
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Refresh
+            </Button>
+            <Button variant="outline" size="sm">
+              <Download className="w-4 h-4 mr-2" />
+              Export
+            </Button>
+          </div>
+        }
+      >
+        <div className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
               {/* Revenue Timeseries */}
               <Card>
@@ -321,13 +316,12 @@ const SalesExplorer: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
         </div>
-      </div>
-      
-      {/* Scout AI Panel - Floating */}
-      <ScoutAIPanel data={data} />
-    </FilterProvider>
+        
+        {/* Scout AI Panel - Floating */}
+        <ScoutAIPanel data={data} />
+      </PageLayout>
+    </Layout>
   );
 };
 
