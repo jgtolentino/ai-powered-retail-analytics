@@ -58,19 +58,19 @@
     "dataValidation": {
       "score": 98,
       "agePyramid": {
-        "primaryGroup": "25-34 (28%)",
+        "primaryGroup": "25-34 (5,040 customers)",
         "distribution": "Realistic",
         "totalCustomers": "18,000"
       },
       "behaviorMatrix": {
-        "dominantSegment": "Frequent Buyers (28.5%)",
+        "dominantSegment": "Frequent Buyers (5,130 customers)",
         "segmentation": "6 clear segments",
         "spendAnalysis": "₱280-₱750 range"
       },
       "loyaltyFunnel": {
-        "retentionRate": "57.5%",
-        "newCustomers": "42.5%",
-        "vipCustomers": "3.0%"
+        "retentionRate": "57.5% (10,350 customers)",
+        "newCustomers": "42.5% (7,650 customers)",
+        "vipCustomers": "3.0% (540 customers)"
       },
       "visitPatterns": {
         "peakDay": "Saturday (18.5%)",

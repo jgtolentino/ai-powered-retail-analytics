@@ -12,6 +12,14 @@ async function runOverviewQueries() {
   // Query 1: Total Revenue and Transaction Count
   console.log('💰 1. REVENUE & TRANSACTION METRICS:');
   try {
+    // Get count first to verify 18K transactions
+    const { count, error: countError } = await supabase
+      .from('transactions')
+      .select('*', { count: 'exact', head: true });
+
+    if (countError) throw countError;
+
+    // Get sample for revenue calculation
     const { data: transactions, error } = await supabase
       .from('transactions')
       .select('total_amount, created_at');
@@ -19,14 +27,16 @@ async function runOverviewQueries() {
     if (error) throw error;
 
     const totalRevenue = transactions.reduce((sum, t) => sum + (t.total_amount || 0), 0);
-    const totalTransactions = transactions.length;
-    const avgTransaction = totalRevenue / totalTransactions;
+    const totalTransactions = count || transactions.length;
+    const avgTransaction = totalRevenue / transactions.length;
 
     console.log(`Total Revenue: ₱${totalRevenue.toLocaleString()}`);
     console.log(`Total Transactions: ${totalTransactions.toLocaleString()}`);
     console.log(`Average Transaction: ₱${avgTransaction.toFixed(2)}`);
+    console.log(`Sample Size Used: ${transactions.length.toLocaleString()} transactions`);
   } catch (error) {
     console.error('Error:', error.message);
+    console.log('Expected: 18,000+ transactions in Philippine retail dataset');
   }
 
   console.log('\n');
