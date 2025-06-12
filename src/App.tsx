@@ -14,6 +14,7 @@ import AIAssistantPage from './components/AIAssistantPage'
 import BrandPerformancePage from './components/BrandPerformancePage'
 import Layout from './components/Layout'
 import { Toaster } from 'sonner'
+import { FilterProvider } from './context/FilterContext'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,75 +28,77 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true,
-        }}
-      >
-        <div className="min-h-screen bg-background">
-          <Routes>
-            <Route path="/" element={<OverviewPage />} />
-            <Route path="/demo" element={<DemoPage />} />
-            <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/sales-explorer" element={
-              <Layout>
-                <SalesExplorer />
-              </Layout>
-            } />
-            <Route path="/basket-analysis" element={<BasketAnalysis />} />
-            <Route path="/consumer-insights" element={<ConsumerInsights />} />
-            <Route path="/device-health" element={<DeviceHealth />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/scout" element={<ScoutDashboard />} />
-            <Route path="/scout-enhanced" element={<EnhancedScoutDashboard />} />
-            <Route path="/ai-genie" element={
-              <Layout>
-                <AIAssistantPage />
-              </Layout>
-            } />
-            <Route path="/ai-assistant" element={
-              <Layout>
-                <AIAssistantPage />
-              </Layout>
-            } />
-            <Route path="/brand-performance" element={
-              <Layout>
-                <BrandPerformancePage />
-              </Layout>
-            } />
-            <Route path="/analytics" element={
-              <Layout>
-                <div className="text-center py-20">
-                  <h2 className="text-2xl font-bold text-gray-900">Analytics Coming Soon</h2>
-                </div>
-              </Layout>
-            } />
-            <Route path="/performance" element={
-              <Layout>
-                <div className="text-center py-20">
-                  <h2 className="text-2xl font-bold text-gray-900">Performance Coming Soon</h2>
-                </div>
-              </Layout>
-            } />
-            <Route path="/customers" element={
-              <Layout>
-                <div className="text-center py-20">
-                  <h2 className="text-2xl font-bold text-gray-900">Customers Coming Soon</h2>
-                </div>
-              </Layout>
-            } />
-            <Route path="/settings" element={
-              <Layout>
-                <div className="text-center py-20">
-                  <h2 className="text-2xl font-bold text-gray-900">Settings Coming Soon</h2>
-                </div>
-              </Layout>
-            } />
-          </Routes>
-          <Toaster position="top-right" />
-        </div>
-      </Router>
+      <FilterProvider>
+        <Router
+          future={{
+            v7_startTransition: true,
+            v7_relativeSplatPath: true,
+          }}
+        >
+          <div className="min-h-screen bg-background">
+            <Routes>
+              <Route path="/" element={<OverviewPage />} />
+              <Route path="/demo" element={<DemoPage />} />
+              <Route path="/overview" element={<OverviewPage />} />
+              <Route path="/sales-explorer" element={
+                <Layout>
+                  <SalesExplorer />
+                </Layout>
+              } />
+              <Route path="/basket-analysis" element={<BasketAnalysis />} />
+              <Route path="/consumer-insights" element={<ConsumerInsights />} />
+              <Route path="/device-health" element={<DeviceHealth />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/scout" element={<ScoutDashboard />} />
+              <Route path="/scout-enhanced" element={<EnhancedScoutDashboard />} />
+              <Route path="/ai-genie" element={
+                <Layout>
+                  <AIAssistantPage />
+                </Layout>
+              } />
+              <Route path="/ai-assistant" element={
+                <Layout>
+                  <AIAssistantPage />
+                </Layout>
+              } />
+              <Route path="/brand-performance" element={
+                <Layout>
+                  <BrandPerformancePage />
+                </Layout>
+              } />
+              <Route path="/analytics" element={
+                <Layout>
+                  <div className="text-center py-20">
+                    <h2 className="text-2xl font-bold text-gray-900">Analytics Coming Soon</h2>
+                  </div>
+                </Layout>
+              } />
+              <Route path="/performance" element={
+                <Layout>
+                  <div className="text-center py-20">
+                    <h2 className="text-2xl font-bold text-gray-900">Performance Coming Soon</h2>
+                  </div>
+                </Layout>
+              } />
+              <Route path="/customers" element={
+                <Layout>
+                  <div className="text-center py-20">
+                    <h2 className="text-2xl font-bold text-gray-900">Customers Coming Soon</h2>
+                  </div>
+                </Layout>
+              } />
+              <Route path="/settings" element={
+                <Layout>
+                  <div className="text-center py-20">
+                    <h2 className="text-2xl font-bold text-gray-900">Settings Coming Soon</h2>
+                  </div>
+                </Layout>
+              } />
+            </Routes>
+            <Toaster position="top-right" />
+          </div>
+        </Router>
+      </FilterProvider>
     </QueryClientProvider>
   )
 }
