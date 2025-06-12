@@ -60,9 +60,9 @@ const navigationItems: NavItem[] = [
   {
     href: '/ai-assistant',
     icon: Brain,
-    label: 'AI Assistant',
-    description: 'Retail intelligence chat',
-    badge: 'NEW'
+    label: 'AI Console',
+    description: 'Comprehensive analytics workspace',
+    badge: 'PRO'
   }
 ];
 

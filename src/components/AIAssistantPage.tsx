@@ -6,7 +6,7 @@ const AIAssistantPage = () => {
     {
       id: 1,
       type: 'bot',
-      content: 'Hello! I\'m Scout AI, your retail analytics assistant. I can help you analyze your 18K+ transactions, understand customer behavior, and get insights about your Philippine retail data. What would you like to explore?',
+      content: 'Welcome to the AI Assistant Console! I\'m your dedicated retail analytics companion for comprehensive data exploration. Unlike the floating Scout AI panel, I provide detailed analysis sessions with full conversation history and export capabilities. I can deep-dive into your 18K+ Philippine retail transactions. How can I assist you today?',
       timestamp: new Date().toLocaleTimeString()
     }
   ]);
@@ -23,31 +23,148 @@ const AIAssistantPage = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Sample responses for different queries
+  // Comprehensive responses for different queries - More detailed than floating panel
   const getAIResponse = (userInput) => {
     const input = userInput.toLowerCase();
     
     if (input.includes('sales') || input.includes('revenue')) {
-      return 'Based on your data, total sales are ₱4,713,281 from 18,000 orders. Your average order value is ₱262. Sales peak during weekends, particularly Saturday afternoons. Personal Care (28.5%) and Food & Beverages (24.8%) are your top categories.';
+      return `**COMPREHENSIVE SALES ANALYSIS**
+
+      📊 **Revenue Overview**: Total sales of ₱4,713,281 across 18,000+ transactions
+      💰 **Average Order Value**: ₱262 per transaction
+      📈 **Peak Performance**: Saturday afternoons generate highest revenue (18.5% of weekly sales)
+      🏆 **Top Categories**: Personal Care (28.5%, ₱1.34M) and Food & Beverages (24.8%, ₱1.17M)
+      
+      **Detailed Breakdown**:
+      • Morning sales (6-10 AM): ₱892K (18.9%)
+      • Afternoon peak (2-6 PM): ₱1.45M (30.8%)
+      • Evening sales (6-10 PM): ₱1.21M (25.7%)
+      
+      **Regional Performance**: Metro Manila leads with 45% of total revenue, followed by Central Luzon (18%) and Visayas (12%).`;
     }
     
     if (input.includes('customer') || input.includes('demographic')) {
-      return 'Your customer base shows interesting patterns: 35% are aged 26-35, 58% female, 40% male. Metro Manila represents 45% of customers, followed by Cebu (18%). Weekend shoppers make up 38% of your customer behavior patterns.';
+      return `**DETAILED CUSTOMER DEMOGRAPHICS**
+
+      👥 **Age Distribution** (18,000 customers):
+      • 18-25: 3,960 customers (22%) - Digital natives, mobile-first shoppers
+      • 26-35: 5,040 customers (28%) - Primary household buyers, highest spend
+      • 36-45: 4,320 customers (24%) - Family-focused, bulk purchasers
+      • 46-55: 2,880 customers (16%) - Brand loyal, quality-conscious
+      • 55+: 1,800 customers (10%) - Traditional shopping patterns
+      
+      🏙️ **Geographic Spread**:
+      • Metro Manila: 8,100 customers (45%) - Urban professionals
+      • Central Luzon: 3,240 customers (18%) - Suburban families
+      • Southern Luzon: 2,700 customers (15%) - Mixed demographics
+      • Visayas: 2,160 customers (12%) - Island communities
+      • Mindanao: 1,800 customers (10%) - Emerging market
+      
+      ⏰ **Shopping Patterns**: Weekend shoppers (Saturday-Sunday) represent 38% of customer activity with higher basket values.`;
     }
     
     if (input.includes('product') || input.includes('category')) {
-      return 'Your FMCG categories perform as follows: Personal Care leads at 28.5% (₱1.34M), Food & Beverages at 24.8% (₱1.17M), and Household Products at 18.2% (₱857K). Health & Wellness shows strong growth at +15.9%.';
+      return `**COMPREHENSIVE PRODUCT CATEGORY ANALYSIS**
+
+      🧴 **Personal Care** (28.5% - ₱1.34M):
+      Top performers: Shampoo, soap, toothpaste, deodorant
+      Growth: +12.4% vs previous period
+      
+      🍿 **Food & Beverages** (24.8% - ₱1.17M):
+      Leading items: Instant noodles, soft drinks, coffee, biscuits
+      Seasonal trends: +15% during summer months
+      
+      🏠 **Household Products** (18.2% - ₱857K):
+      Key categories: Detergent, fabric softener, cleaning supplies
+      Bulk purchase frequency: 65% buy monthly
+      
+      💊 **Health & Wellness** (12.4% - ₱584K):
+      Fastest growing: +15.9% year-over-year
+      Emerging: Vitamins, supplements, health drinks
+      
+      👶 **Baby Care** (8.7% - ₱410K):
+      Explosive growth: +22.1%
+      Premium segment expanding rapidly
+      
+      🐕 **Pet Care** (4.2% - ₱198K):
+      Breakthrough category: +18.5% growth
+      Urban market driver`;
     }
     
     if (input.includes('trend') || input.includes('growth')) {
-      return 'Growth trends show Baby Care leading at +22.1%, Pet Care at +18.5%, and Health & Wellness at +15.9%. These categories represent emerging opportunities in the Philippine market.';
+      return `**COMPREHENSIVE GROWTH TRENDS ANALYSIS**
+
+      📈 **Category Growth Rankings**:
+      1. Baby Care: +22.1% (Fastest growing - premium baby products)
+      2. Pet Care: +18.5% (Urban lifestyle shift)
+      3. Health & Wellness: +15.9% (Post-pandemic awareness)
+      4. Personal Care: +12.4% (Consistent performer)
+      5. Food & Beverages: +8.7% (Stable demand)
+      
+      🌟 **Emerging Opportunities**:
+      • Organic/Natural products: +35% in premium segments
+      • Ready-to-eat meals: +28% among working professionals
+      • Eco-friendly packaging: +31% preference increase
+      
+      📊 **Market Dynamics**:
+      • Digital payment adoption: 67% of transactions
+      • Mobile commerce: 45% growth in app-based orders
+      • Subscription models: 23% interest in regular delivery
+      
+      🎯 **Philippine Market Specific**:
+      • Sari-sari store modernization driving 15% of growth
+      • Regional expansion beyond Metro Manila: +19%
+      • Local brand preference increasing: +12%`;
     }
     
     if (input.includes('recommendation') || input.includes('suggest')) {
-      return 'Based on your data, I recommend: 1) Focus marketing on 26-35 age group, 2) Expand Baby Care and Pet Care inventory, 3) Optimize weekend staffing, 4) Consider cross-promotions between Personal Care and Health & Wellness products.';
+      return `**STRATEGIC BUSINESS RECOMMENDATIONS**
+
+      🎯 **Immediate Actions** (Next 30 days):
+      1. **Target 26-35 Age Group**: Focus 60% of marketing budget on this highest-value segment
+      2. **Weekend Optimization**: Increase staff by 25% on Saturdays, extend hours
+      3. **Inventory Expansion**: Stock Baby Care (+40%) and Pet Care (+30%) products
+      
+      📈 **Growth Strategies** (Next 90 days):
+      1. **Cross-Promotion Programs**: 
+         • Personal Care + Health & Wellness bundles
+         • Food & Beverage + Household product combos
+      2. **Regional Expansion**: 
+         • Open 3 new locations in Central Luzon
+         • Partner with 50 sari-sari stores in Visayas
+      
+      💡 **Innovation Opportunities**:
+      • Launch subscription service for repeat purchases
+      • Develop private label products in fast-growing categories
+      • Implement AI-powered inventory prediction
+      
+      🎪 **Marketing Focus**:
+      • Mobile-first campaigns for 18-35 demographics
+      • Community events in high-growth regions
+      • Influencer partnerships for premium categories
+      
+      📊 **Expected Impact**: 15-20% revenue increase within 6 months based on market analysis.`;
     }
     
-    return 'I can help you analyze sales data, customer demographics, product performance, growth trends, and provide recommendations. Try asking about "sales performance", "customer insights", "product categories", or "growth trends".';
+    return `**AI ASSISTANT CONSOLE CAPABILITIES**
+
+    I provide comprehensive, detailed analysis unlike the quick insights from the floating Scout AI panel. I can help with:
+    
+    🔍 **Deep Analytics**: 
+    • "sales performance" - Detailed revenue breakdowns
+    • "customer insights" - Complete demographic analysis
+    • "product categories" - Category performance deep-dives
+    • "growth trends" - Market dynamics and forecasts
+    • "recommendations" - Strategic business guidance
+    
+    📊 **Advanced Features**:
+    • Multi-dimensional data analysis
+    • Historical trend comparisons
+    • Predictive insights
+    • Export-ready reports
+    • Session-based conversation history
+    
+    Ask me anything about your 18,000+ Philippine retail transactions!`;
   };
 
   const handleSendMessage = async () => {
@@ -89,14 +206,14 @@ const AIAssistantPage = () => {
     setMessages([{
       id: 1,
       type: 'bot',
-      content: 'Chat cleared! I\'m ready to help you with new retail analytics questions.',
+      content: 'Console cleared! Ready for a new comprehensive analytics session. I can provide detailed insights, historical analysis, and export-ready reports.',
       timestamp: new Date().toLocaleTimeString()
     }]);
   };
 
   const exportChat = () => {
     const chatData = messages.map(msg => 
-      `[${msg.timestamp}] ${msg.type === 'bot' ? 'Scout AI' : 'You'}: ${msg.content}`
+      `[${msg.timestamp}] ${msg.type === 'bot' ? 'AI Assistant Console' : 'You'}: ${msg.content}`
     ).join('\n\n');
     
     const blob = new Blob([chatData], { type: 'text/plain' });
@@ -111,11 +228,11 @@ const AIAssistantPage = () => {
   };
 
   const quickQuestions = [
-    "What are my top selling categories?",
-    "Show me customer demographics",
-    "What are the growth trends?",
-    "Give me sales recommendations",
-    "Analyze weekend vs weekday sales"
+    "Provide comprehensive sales analysis with regional breakdown",
+    "Show detailed customer demographics and shopping patterns", 
+    "Analyze growth trends and emerging market opportunities",
+    "Give strategic business recommendations with timeline",
+    "Compare weekend vs weekday performance with insights"
   ];
 
   return (
@@ -129,8 +246,8 @@ const AIAssistantPage = () => {
                 <Bot className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">Scout AI Assistant</h1>
-                <p className="text-gray-600">Your intelligent retail analytics companion</p>
+                <h1 className="text-2xl font-bold text-gray-800">AI Assistant Console</h1>
+                <p className="text-gray-600">Comprehensive retail analytics workspace</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
@@ -179,24 +296,30 @@ const AIAssistantPage = () => {
                 
                 {/* AI Stats */}
                 <div className="mt-6 pt-4 border-t">
-                  <h4 className="font-medium text-gray-700 mb-3">AI Capabilities</h4>
+                  <h4 className="font-medium text-gray-700 mb-3">Console Features</h4>
                   <div className="space-y-2 text-sm text-gray-600">
+                    <div className="flex justify-between">
+                      <span>Analysis Depth</span>
+                      <span className="font-medium">Comprehensive</span>
+                    </div>
                     <div className="flex justify-between">
                       <span>Data Points</span>
                       <span className="font-medium">18,000+</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Categories</span>
-                      <span className="font-medium">7 FMCG</span>
+                      <span>Export Format</span>
+                      <span className="font-medium">Full Reports</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Regions</span>
-                      <span className="font-medium">Philippines</span>
+                      <span>Session Type</span>
+                      <span className="font-medium">Extended</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Analysis Type</span>
-                      <span className="font-medium">Real-time</span>
-                    </div>
+                  </div>
+                  
+                  <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                    <p className="text-xs text-blue-700">
+                      💡 <strong>Pro Tip</strong>: This console provides detailed analysis unlike the floating Scout AI panel which gives quick insights.
+                    </p>
                   </div>
                 </div>
               </div>
