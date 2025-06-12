@@ -272,12 +272,14 @@ export const EnhancedScoutPanel: React.FC<EnhancedScoutPanelProps> = ({
                     cx="50%"
                     cy="50%"
                     outerRadius={45}
+                    innerRadius={20}
                     dataKey="revenue"
                     label={({ category, percentage }) => 
                       percentage > 10 ? `${category} ${percentage}%` : ''
                     }
                     labelLine={false}
                     fontSize={9}
+                    paddingAngle={2}
                   >
                     {(data.product_mix?.categories || []).map((entry: any, index: number) => (
                       <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />

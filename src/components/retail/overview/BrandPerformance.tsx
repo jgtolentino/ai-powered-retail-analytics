@@ -186,6 +186,7 @@ export const BrandPerformance: React.FC = () => {
                 dataKey="value"
                 startAngle={90}
                 endAngle={450}
+                paddingAngle={2}
               >
                 {pieData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

@@ -217,9 +217,11 @@ const BasketAnalysis: React.FC = () => {
                           cy="50%"
                           labelLine={false}
                           label={({ name, value }) => `${name}: ${value}%`}
-                          outerRadius={60}
+                          outerRadius={75}
+                          innerRadius={35}
                           fill="#8884d8"
                           dataKey="value"
+                          paddingAngle={2}
                         >
                           {categoryMixData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={entry.color} />

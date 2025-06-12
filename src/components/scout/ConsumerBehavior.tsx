@@ -243,12 +243,14 @@ export default function ConsumerBehavior({ data }: ConsumerBehaviorProps) {
                 cx="50%"
                 cy="50%"
                 outerRadius={50}
+                innerRadius={25}
                 dataKey="count"
                 label={({ method, percentage }) => 
                   `${method} ${percentage.toFixed(0)}%`
                 }
                 labelLine={false}
                 fontSize={9}
+                paddingAngle={2}
               >
                 {paymentMethodData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

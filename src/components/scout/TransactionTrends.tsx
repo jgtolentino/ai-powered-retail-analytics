@@ -276,10 +276,12 @@ export default function TransactionTrends({ data }: TransactionTrendsProps) {
                 cx="50%"
                 cy="50%"
                 outerRadius={40}
+                innerRadius={20}
                 dataKey="transactions"
                 label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                 labelLine={false}
                 fontSize={10}
+                paddingAngle={2}
               >
                 {weekendData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

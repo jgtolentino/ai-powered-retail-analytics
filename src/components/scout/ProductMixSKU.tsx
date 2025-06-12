@@ -257,12 +257,14 @@ export default function ProductMixSKU({ data }: ProductMixSKUProps) {
                 cx="50%"
                 cy="50%"
                 outerRadius={50}
+                innerRadius={25}
                 dataKey="revenue"
                 label={({ category, percent }) => 
                   `${category} ${(percent * 100).toFixed(0)}%`
                 }
                 labelLine={false}
                 fontSize={9}
+                paddingAngle={2}
               >
                 {categoryDistribution.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />

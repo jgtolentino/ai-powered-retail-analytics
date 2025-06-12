@@ -292,10 +292,12 @@ export default function ConsumerProfiling({ data }: ConsumerProfilingProps) {
                     cx="50%"
                     cy="50%"
                     outerRadius={50}
+                    innerRadius={25}
                     dataKey="count"
                     label={({ gender, count }) => `${gender}: ${count}`}
                     labelLine={false}
                     fontSize={10}
+                    paddingAngle={2}
                   >
                     {demographics.gender.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />

@@ -344,8 +344,10 @@ export default function RetailDashboard() {
                   labelLine={false}
                   label={({ region, percent }) => `${region} ${(percent * 100).toFixed(0)}%`}
                   outerRadius={100}
+                  innerRadius={50}
                   fill="#8884d8"
                   dataKey="sales"
+                  paddingAngle={2}
                 >
                   {metrics?.salesByRegion.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />

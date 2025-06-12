@@ -222,9 +222,11 @@ const ConsumerInsights: React.FC = () => {
                           cy="50%"
                           labelLine={false}
                           label={({ type, percentage }) => `${type}: ${percentage}%`}
-                          outerRadius={80}
+                          outerRadius={90}
+                          innerRadius={45}
                           fill="#8884d8"
                           dataKey="count"
+                          paddingAngle={3}
                         >
                           {behaviorData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={['#10b981', '#f59e0b', '#ef4444'][index]} />
