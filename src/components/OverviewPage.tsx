@@ -7,6 +7,7 @@ import DailyTrendsHeatmap from './retail/overview/DailyTrendsHeatmap';
 import BasketSummary from './retail/overview/BasketSummary';
 import BrandPerformance from './retail/overview/BrandPerformance';
 import ConsumerProfile from './retail/overview/ConsumerProfile';
+import CategoryMix from './retail/overview/CategoryMix';
 import ScoutAIPanel from './scout/ScoutAIPanel';
 import useAllTransactions from '../hooks/useAllTransactions';
 import { Store, Sparkles } from 'lucide-react';
@@ -84,6 +85,11 @@ const OverviewPage: React.FC = () => {
               
               {/* Consumer Profile */}
               <ConsumerProfile />
+            </section>
+            
+            {/* Category Mix Analysis */}
+            <section>
+              <CategoryMix />
             </section>
           </div>
         </div>
