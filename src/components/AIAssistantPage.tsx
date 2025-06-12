@@ -236,45 +236,52 @@ const AIAssistantPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-          <div className="flex items-center justify-between">
+    <div className="space-y-6">
+      {/* Page Header - Consistent with Layout system */}
+      <div className="mb-6">
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 flex items-center">
+              <Bot className="w-6 h-6 mr-2 text-blue-600" />
+              AI Assistant
+              <span className="ml-3 text-sm bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                Console
+              </span>
+            </h1>
+            <p className="mt-2 text-sm text-gray-700">
+              Comprehensive retail analytics workspace with detailed conversation history
+            </p>
+          </div>
+          <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
-                <Bot className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-800">AI Assistant Console</h1>
-                <p className="text-gray-600">Comprehensive retail analytics workspace</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
               <button
                 onClick={clearChat}
-                className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 title="Clear Chat"
               >
-                <RefreshCw className="w-5 h-5" />
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Clear
               </button>
               <button
                 onClick={exportChat}
-                className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                 title="Export Chat"
               >
-                <Download className="w-5 h-5" />
+                <Download className="w-4 h-4 mr-2" />
+                Export
               </button>
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                 title={isMinimized ? "Maximize" : "Minimize"}
               >
-                {isMinimized ? <Maximize2 className="w-5 h-5" /> : <Minimize2 className="w-5 h-5" />}
+                {isMinimized ? <Maximize2 className="w-4 h-4 mr-2" /> : <Minimize2 className="w-4 h-4 mr-2" />}
+                {isMinimized ? "Expand" : "Minimize"}
               </button>
             </div>
           </div>
         </div>
+      </div>
 
         {!isMinimized && (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -424,7 +431,6 @@ const AIAssistantPage = () => {
             <p className="text-gray-600">Scout AI is minimized. Click maximize to continue chatting.</p>
           </div>
         )}
-      </div>
     </div>
   );
 };

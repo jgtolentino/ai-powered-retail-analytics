@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../ui/card';
 import useAllTransactions from '../../../hooks/useAllTransactions';
+import { useRealTimeBasketMetrics } from '../../../hooks/useRealTimeData';
 import { Package, TrendingUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -11,66 +12,25 @@ interface BasketData {
 }
 
 export const BasketSummary: React.FC = () => {
-  const { transactions, loading, error } = useAllTransactions();
+  const { transactions, loading: transactionLoading, error: transactionError } = useAllTransactions();
+  
+  // ✅ REAL DATA: Use real-time basket metrics instead of hardcoded products
+  const { 
+    data: realBasketData, 
+    loading: basketLoading, 
+    error: basketError, 
+    refresh: refreshBaskets 
+  } = useRealTimeBasketMetrics();
 
-  // Calculate basket metrics from ALL 18K transactions
-  const calculateBasketData = (): BasketData => {
-    if (!transactions || transactions.length === 0) {
-      return {
-        avg_basket_size: 0,
-        basket_distribution: [],
-        top_products: []
-      };
-    }
+  const loading = transactionLoading || basketLoading;
+  const error = transactionError || basketError;
 
-    // For real calculation, we'll simulate basket patterns from transaction amounts
-    // In a real app, you'd join with transaction_items table
-    const basketSizes = new Map<number, number>();
-    let totalItems = 0;
-    const totalTransactions = transactions.length;
-
-    // Simulate basket sizes based on transaction amounts
-    transactions.forEach(transaction => {
-      const amount = transaction.total_amount || 0;
-      // Estimate basket size based on amount (assuming avg item price ~₱50)
-      const estimatedBasketSize = Math.max(1, Math.round(amount / 50));
-      const clampedSize = Math.min(estimatedBasketSize, 15); // Cap at 15 items
-      
-      totalItems += clampedSize;
-      const currentCount = basketSizes.get(clampedSize) || 0;
-      basketSizes.set(clampedSize, currentCount + 1);
-    });
-
-    // Calculate average basket size from ALL transactions
-    const avgBasketSize = totalTransactions > 0 ? totalItems / totalTransactions : 0;
-
-    // Convert basket size distribution to array with percentages
-    const basketDistribution = Array.from(basketSizes.entries())
-      .map(([size, count]) => ({
-        size,
-        count,
-        percentage: totalTransactions > 0 ? Math.round((count / totalTransactions) * 100) : 0
-      }))
-      .sort((a, b) => a.size - b.size)
-      .slice(0, 10); // Top 10 basket sizes
-
-    // Generate realistic top products based on Philippine retail
-    const topProducts = [
-      { product_name: 'Coca-Cola 355ml', frequency: 45, category: 'Beverages' },
-      { product_name: 'Lucky Me Pancit Canton', frequency: 38, category: 'Noodles' },
-      { product_name: 'Nestlé Bear Brand', frequency: 32, category: 'Milk' },
-      { product_name: 'Safeguard Soap', frequency: 28, category: 'Personal Care' },
-      { product_name: 'Maggi Magic Sarap', frequency: 25, category: 'Seasoning' }
-    ];
-
-    return {
-      avg_basket_size: Number(avgBasketSize.toFixed(1)),
-      basket_distribution: basketDistribution,
-      top_products: topProducts
-    };
+  // Use real basket data if available, otherwise fallback to calculated data
+  const data = realBasketData || {
+    avg_basket_size: 0,
+    basket_distribution: [],
+    top_products: []
   };
-
-  const data = calculateBasketData();
 
   if (loading) {
     return (

@@ -1,4 +1,7 @@
 import { supabase } from '@/lib/supabase/client';
+import { dashboardCache, brandCache, transactionCache } from '../cache/CacheManager';
+import { dataValidator } from '../validation/DataValidator';
+import { errorHandler } from '../error/ErrorHandler';
 
 export interface DashboardMetrics {
   totalRevenue: number;
@@ -32,60 +35,162 @@ export interface BasketMetrics {
 
 export class DataService {
   /**
-   * Get real-time dashboard metrics from Supabase
+   * Get real-time dashboard metrics from Supabase with caching and validation
    */
   async getDashboardMetrics(): Promise<DashboardMetrics> {
-    try {
-      const { data: transactions, error } = await supabase
-        .from('transactions')
-        .select('*')
-        .order('created_at', { ascending: false });
+    return dashboardCache.get(
+      {
+        namespace: 'dashboard',
+        operation: 'metrics',
+        version: '1.0'
+      },
+      async () => {
+        try {
+          const { data: transactions, error } = await supabase
+            .from('transactions')
+            .select('*')
+            .order('created_at', { ascending: false });
 
-      if (error) throw error;
+          if (error) {
+            await errorHandler.handleError(error as Error, {
+              operation: 'getDashboardMetrics',
+              component: 'DataService',
+              timestamp: new Date(),
+              metadata: { tableName: 'transactions' }
+            });
+            throw error;
+          }
 
-      return this.transformTransactionMetrics(transactions || []);
-    } catch (error) {
-      console.error('Error fetching dashboard metrics:', error);
-      throw error;
-    }
+          // Validate transaction data
+          const validationResult = dataValidator.validateBatch(
+            transactions || [],
+            dataValidator.validateTransactionData
+          );
+
+          if (validationResult.invalid.length > 0) {
+            console.warn(`Dashboard: ${validationResult.invalid.length} invalid transactions found`);
+          }
+
+          const metrics = this.transformTransactionMetrics(validationResult.valid);
+          
+          return metrics;
+        } catch (error) {
+          await errorHandler.handleError(error as Error, {
+            operation: 'getDashboardMetrics',
+            component: 'DataService',
+            timestamp: new Date()
+          });
+          throw error;
+        }
+      },
+      { ttl: 2 * 60 * 1000 } // 2 minutes cache for dashboard
+    );
   }
 
   /**
-   * Get real brand performance data instead of hardcoded values
+   * Get real brand performance data with caching and validation
    */
   async getBrandPerformance(): Promise<BrandMetric[]> {
-    try {
-      const { data: transactions, error } = await supabase
-        .from('transactions')
-        .select('*')
-        .order('created_at', { ascending: false });
+    return brandCache.get(
+      {
+        namespace: 'brands',
+        operation: 'performance',
+        version: '1.0'
+      },
+      async () => {
+        try {
+          const { data: transactions, error } = await supabase
+            .from('transactions')
+            .select('*')
+            .order('created_at', { ascending: false });
 
-      if (error) throw error;
+          if (error) {
+            await errorHandler.handleError(error as Error, {
+              operation: 'getBrandPerformance',
+              component: 'DataService',
+              timestamp: new Date(),
+              metadata: { tableName: 'transactions' }
+            });
+            throw error;
+          }
 
-      return this.calculateBrandMetrics(transactions || []);
-    } catch (error) {
-      console.error('Error fetching brand performance:', error);
-      throw error;
-    }
+          // Validate transaction data
+          const validationResult = dataValidator.validateBatch(
+            transactions || [],
+            dataValidator.validateTransactionData
+          );
+
+          const brandMetrics = this.calculateBrandMetrics(validationResult.valid);
+          
+          // Validate brand metrics
+          const validatedBrands = brandMetrics.filter(brand => {
+            const validation = dataValidator.validateBrandData(brand);
+            if (!validation.isValid) {
+              console.warn(`Invalid brand data for ${brand.name}:`, validation.errors);
+              return false;
+            }
+            return true;
+          });
+
+          return validatedBrands;
+        } catch (error) {
+          await errorHandler.handleError(error as Error, {
+            operation: 'getBrandPerformance',
+            component: 'DataService',
+            timestamp: new Date()
+          });
+          throw error;
+        }
+      },
+      { ttl: 10 * 60 * 1000 } // 10 minutes cache for brand data
+    );
   }
 
   /**
-   * Get real basket analytics instead of hardcoded product names
+   * Get real basket analytics with caching and validation
    */
   async getBasketMetrics(): Promise<BasketMetrics> {
-    try {
-      const { data: transactions, error } = await supabase
-        .from('transactions')
-        .select('*')
-        .order('created_at', { ascending: false });
+    return transactionCache.get(
+      {
+        namespace: 'baskets',
+        operation: 'metrics',
+        version: '1.0'
+      },
+      async () => {
+        try {
+          const { data: transactions, error } = await supabase
+            .from('transactions')
+            .select('*')
+            .order('created_at', { ascending: false });
 
-      if (error) throw error;
+          if (error) {
+            await errorHandler.handleError(error as Error, {
+              operation: 'getBasketMetrics',
+              component: 'DataService',
+              timestamp: new Date(),
+              metadata: { tableName: 'transactions' }
+            });
+            throw error;
+          }
 
-      return this.calculateBasketMetrics(transactions || []);
-    } catch (error) {
-      console.error('Error fetching basket metrics:', error);
-      throw error;
-    }
+          // Validate transaction data
+          const validationResult = dataValidator.validateBatch(
+            transactions || [],
+            dataValidator.validateTransactionData
+          );
+
+          return this.calculateBasketMetrics(validationResult.valid);
+        } catch (error) {
+          await errorHandler.handleError(error as Error, {
+            operation: 'getBasketMetrics',
+            component: 'DataService',
+            timestamp: new Date()
+          });
+          throw error;
+        }
+      },
+      { ttl: 1 * 60 * 1000 } // 1 minute cache for basket data
+    );
   }
 
   /**

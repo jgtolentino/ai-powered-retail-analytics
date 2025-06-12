@@ -1,7 +1,41 @@
 /**
- * Configuration file for static data that doesn't change frequently
- * This replaces hardcoded values throughout the application
+ * Static Data Configuration - Week 4 Complete
+ * All remaining static data moved to configuration files
+ * Centralized configuration for all hardcoded values and reference data
  */
+
+export interface CompetitiveBenchmarks {
+  market_leaders: { [key: string]: number };
+  industry_averages: { [key: string]: number };
+  performance_targets: { [key: string]: number };
+}
+
+export interface BrandColors {
+  [brandName: string]: string;
+}
+
+export interface CategoryMappings {
+  [productName: string]: string;
+}
+
+export interface FallbackData {
+  brandPerformance: Array<{
+    id: string;
+    name: string;
+    marketShare: number;
+    revenue: number;
+    growth: number;
+    trend: 'up' | 'down' | 'stable';
+    category: string;
+    color: string;
+    transactionCount?: number;
+  }>;
+  basketMetrics: {
+    avg_basket_size: number;
+    basket_distribution: Array<{ size: number; count: number; percentage: number }>;
+    top_products: Array<{ product_name: string; frequency: number; category: string }>;
+  };
+}
 
 export const PHILIPPINES_LOCATIONS = {
   regions: [
@@ -43,23 +77,232 @@ export const PRODUCT_CATEGORIES = {
   'Tobacco': {
     subcategories: ['Cigarettes', 'Accessories'],
     color: '#8B5CF6'
+  },
+  'Pet Care': {
+    subcategories: ['Dog Food', 'Cat Food', 'Pet Supplies', 'Pet Health'],
+    color: '#06B6D4'
+  },
+  'Baby Care': {
+    subcategories: ['Baby Food', 'Diapers', 'Baby Hygiene', 'Baby Health'],
+    color: '#EC4899'
+  },
+  'Home Care': {
+    subcategories: ['Cleaning Products', 'Laundry Care', 'Kitchen Care', 'Air Care'],
+    color: '#84CC16'
   }
 };
 
-export const COMPETITIVE_BENCHMARKS = {
-  industry_averages: {
-    'Brand Awareness': 78,
-    'Purchase Intent': 65,
-    'Customer Satisfaction': 4.1,
-    'Price Perception': 75,
-    'Quality Rating': 4.3
-  },
+// ✅ WEEK 4 COMPLETE: All competitive benchmarks moved to configuration
+export const COMPETITIVE_BENCHMARKS: CompetitiveBenchmarks = {
   market_leaders: {
     'Brand Awareness': 92,
-    'Purchase Intent': 82,
-    'Customer Satisfaction': 4.7,
+    'Purchase Intent': 85,
+    'Customer Satisfaction': 4.8,
     'Price Perception': 88,
-    'Quality Rating': 4.8
+    'Quality Rating': 4.7,
+    'Market Share': 45.2,
+    'Revenue Growth': 18.5,
+    'Net Promoter Score': 72,
+    'Ad Recall': 68,
+    'Brand Loyalty': 78
+  },
+  industry_averages: {
+    'Brand Awareness': 78,
+    'Purchase Intent': 68,
+    'Customer Satisfaction': 4.2,
+    'Price Perception': 75,
+    'Quality Rating': 4.1,
+    'Market Share': 15.8,
+    'Revenue Growth': 8.2,
+    'Net Promoter Score': 45,
+    'Ad Recall': 42,
+    'Brand Loyalty': 52
+  },
+  performance_targets: {
+    'Brand Awareness': 85,
+    'Purchase Intent': 75,
+    'Customer Satisfaction': 4.5,
+    'Price Perception': 80,
+    'Quality Rating': 4.4,
+    'Market Share': 35.0,
+    'Revenue Growth': 12.0,
+    'Net Promoter Score': 60,
+    'Ad Recall': 55,
+    'Brand Loyalty': 65
+  }
+};
+
+// ✅ WEEK 4 COMPLETE: Brand color schemes for consistent visualization
+export const BRAND_COLORS: BrandColors = {
+  'TBWA': '#1E40AF',
+  'P&G': '#22C55E',
+  'Unilever': '#EF4444',
+  'Nestlé': '#F59E0B',
+  'Johnson & Johnson': '#8B5CF6',
+  'Colgate-Palmolive': '#06B6D4',
+  'L\'Oréal': '#EC4899',
+  'Reckitt': '#84CC16',
+  'Kimberly-Clark': '#F97316',
+  'Henkel': '#6366F1',
+  'Procter & Gamble': '#10B981',
+  'Mars': '#F43F5E',
+  'PepsiCo': '#3B82F6',
+  'Coca-Cola': '#DC2626',
+  'Mondelez': '#7C3AED',
+  'Unknown': '#6B7280',
+  'Other': '#9CA3AF'
+};
+
+// ✅ WEEK 4 COMPLETE: Product category mappings
+export const CATEGORY_MAPPINGS: CategoryMappings = {
+  // Health & Wellness
+  'Paracetamol': 'Health & Wellness',
+  'Vitamin C': 'Health & Wellness',
+  'Multivitamins': 'Health & Wellness',
+  'Pain Relief': 'Health & Wellness',
+  'Cough Syrup': 'Health & Wellness',
+  'Biogesic': 'Health & Wellness',
+  'Neozep': 'Health & Wellness',
+  'Solmux': 'Health & Wellness',
+  'Bioflu': 'Health & Wellness',
+  'Advil': 'Health & Wellness',
+  
+  // Personal Care
+  'Shampoo': 'Personal Care',
+  'Toothpaste': 'Personal Care',
+  'Soap': 'Personal Care',
+  'Deodorant': 'Personal Care',
+  'Facial Cleanser': 'Personal Care',
+  'Moisturizer': 'Personal Care',
+  'Pantene': 'Personal Care',
+  'Head & Shoulders': 'Personal Care',
+  'Colgate': 'Personal Care',
+  'Safeguard': 'Personal Care',
+  'Dove': 'Personal Care',
+  'Olay': 'Personal Care',
+  
+  // Home Care
+  'Laundry Detergent': 'Home Care',
+  'Dishwashing Liquid': 'Home Care',
+  'All-Purpose Cleaner': 'Home Care',
+  'Fabric Softener': 'Home Care',
+  'Floor Cleaner': 'Home Care',
+  'Tide': 'Home Care',
+  'Ariel': 'Home Care',
+  'Joy': 'Home Care',
+  'Downy': 'Home Care',
+  'Mr. Clean': 'Home Care',
+  
+  // Baby Care
+  'Baby Shampoo': 'Baby Care',
+  'Baby Lotion': 'Baby Care',
+  'Diapers': 'Baby Care',
+  'Baby Food': 'Baby Care',
+  'Baby Wipes': 'Baby Care',
+  'Johnson\'s Baby': 'Baby Care',
+  'Pampers': 'Baby Care',
+  'Huggies': 'Baby Care',
+  'Cerelac': 'Baby Care',
+  
+  // Pet Care
+  'Dog Food': 'Pet Care',
+  'Cat Food': 'Pet Care',
+  'Pet Shampoo': 'Pet Care',
+  'Pet Treats': 'Pet Care',
+  'Pet Vitamins': 'Pet Care',
+  'Pedigree': 'Pet Care',
+  'Whiskas': 'Pet Care',
+  'Royal Canin': 'Pet Care',
+  
+  // Food & Beverages
+  'Instant Noodles': 'Food & Beverages',
+  'Coffee': 'Food & Beverages',
+  'Tea': 'Food & Beverages',
+  'Soft Drinks': 'Food & Beverages',
+  'Energy Drinks': 'Food & Beverages',
+  'Lucky Me': 'Food & Beverages',
+  'Nissin': 'Food & Beverages',
+  'Nescafe': 'Food & Beverages',
+  'Milo': 'Food & Beverages',
+  'Coca-Cola': 'Food & Beverages',
+  'Pepsi': 'Food & Beverages'
+};
+
+// ✅ WEEK 4 COMPLETE: Fallback data for when real data is unavailable
+export const FALLBACK_DATA: FallbackData = {
+  brandPerformance: [
+    {
+      id: 'tbwa-1',
+      name: 'TBWA Health',
+      marketShare: 35.5,
+      revenue: 1670000,
+      growth: 12.3,
+      trend: 'up',
+      category: 'Health & Wellness',
+      color: '#1E40AF',
+      transactionCount: 1250
+    },
+    {
+      id: 'p&g-1',
+      name: 'P&G Personal Care',
+      marketShare: 24.8,
+      revenue: 1180000,
+      growth: 8.7,
+      trend: 'up',
+      category: 'Personal Care',
+      color: '#22C55E',
+      transactionCount: 980
+    },
+    {
+      id: 'unilever-1',
+      name: 'Unilever Home',
+      marketShare: 18.2,
+      revenue: 865000,
+      growth: -2.1,
+      trend: 'down',
+      category: 'Home Care',
+      color: '#EF4444',
+      transactionCount: 720
+    },
+    {
+      id: 'nestle-1',
+      name: 'Nestlé Baby',
+      marketShare: 12.1,
+      revenue: 575000,
+      growth: 15.9,
+      trend: 'up',
+      category: 'Baby Care',
+      color: '#F59E0B',
+      transactionCount: 450
+    },
+    {
+      id: 'jj-1',
+      name: 'J&J Consumer',
+      marketShare: 9.4,
+      revenue: 446000,
+      growth: 5.2,
+      trend: 'up',
+      category: 'Personal Care',
+      color: '#8B5CF6',
+      transactionCount: 380
+    }
+  ],
+  basketMetrics: {
+    avg_basket_size: 3.2,
+    basket_distribution: [
+      { size: 1, count: 420, percentage: 35 },
+      { size: 2, count: 360, percentage: 30 },
+      { size: 3, count: 240, percentage: 20 },
+      { size: 4, count: 120, percentage: 10 },
+      { size: 5, count: 60, percentage: 5 }
+    ],
+    top_products: [
+      { product_name: 'Biogesic', frequency: 15.2, category: 'Health & Wellness' },
+      { product_name: 'Pantene Shampoo', frequency: 12.8, category: 'Personal Care' },
+      { product_name: 'Tide Detergent', frequency: 11.5, category: 'Home Care' },
+      { product_name: 'Johnson\'s Baby Shampoo', frequency: 9.3, category: 'Baby Care' },
+      { product_name: 'Colgate Toothpaste', frequency: 8.7, category: 'Personal Care' }
+    ]
   }
 };
 
