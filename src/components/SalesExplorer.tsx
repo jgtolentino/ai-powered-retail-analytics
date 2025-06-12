@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from 'react';
-import Layout from './Layout';
 import PageLayout from './PageLayout';
 import useAllTransactions, { Transaction } from '../hooks/useAllTransactions';
 import ScoutAIPanel from './scout/ScoutAIPanel';
@@ -91,78 +90,73 @@ const SalesExplorer: React.FC = () => {
 
   if (loading) {
     return (
-      <Layout>
-        <PageLayout 
-          title={
-            <div className="flex items-center gap-3">
-              <TrendingUp className="h-8 w-8 text-blue-600" />
-              Sales Explorer
-            </div>
-          }
-          description="Transaction analysis and drill-down"
-        >
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <div className="text-lg text-gray-600">Loading sales data...</div>
-              <div className="text-sm text-gray-500 mt-2">Processing {transactions.length} transactions...</div>
-            </div>
-          </div>
-        </PageLayout>
-      </Layout>
-    );
-  }
-
-  if (error) {
-    return (
-      <Layout>
-        <PageLayout 
-          title={
-            <div className="flex items-center gap-3">
-              <TrendingUp className="h-8 w-8 text-red-600" />
-              Sales Explorer
-            </div>
-          }
-          description="Transaction analysis and drill-down"
-        >
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <TrendingUp className="h-12 w-12 text-red-400 mx-auto mb-4" />
-              <div className="text-lg text-red-600">Error Loading Sales Data</div>
-              <div className="text-sm text-red-500 mt-2">Unable to process transaction data</div>
-            </div>
-          </div>
-        </PageLayout>
-      </Layout>
-    );
-  }
-
-  return (
-    <Layout>
       <PageLayout 
         title={
           <div className="flex items-center gap-3">
             <TrendingUp className="h-8 w-8 text-blue-600" />
             Sales Explorer
-            <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
-              {transactions.length.toLocaleString()} transactions
-            </span>
           </div>
         }
         description="Transaction analysis and drill-down"
-        actions={
-          <div className="flex gap-3">
-            <Button variant="outline" size="sm">
-              <RefreshCw className="w-4 h-4 mr-2" />
-              Refresh
-            </Button>
-            <Button variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
+      >
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <TrendingUp className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <div className="text-lg text-gray-600">Loading sales data...</div>
+            <div className="text-sm text-gray-500 mt-2">Processing {transactions.length} transactions...</div>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
+
+  if (error) {
+    return (
+      <PageLayout 
+        title={
+          <div className="flex items-center gap-3">
+            <TrendingUp className="h-8 w-8 text-red-600" />
+            Sales Explorer
           </div>
         }
+        description="Transaction analysis and drill-down"
       >
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <TrendingUp className="h-12 w-12 text-red-400 mx-auto mb-4" />
+            <div className="text-lg text-red-600">Error Loading Sales Data</div>
+            <div className="text-sm text-red-500 mt-2">Unable to process transaction data</div>
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
+
+  return (
+    <PageLayout 
+      title={
+        <div className="flex items-center gap-3">
+          <TrendingUp className="h-8 w-8 text-blue-600" />
+          Sales Explorer
+          <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
+            {transactions.length.toLocaleString()} transactions
+          </span>
+        </div>
+      }
+      description="Transaction analysis and drill-down"
+      actions={
+        <div className="flex gap-3">
+          <Button variant="outline" size="sm">
+            <RefreshCw className="w-4 h-4 mr-2" />
+            Refresh
+          </Button>
+          <Button variant="outline" size="sm">
+            <Download className="w-4 h-4 mr-2" />
+            Export
+          </Button>
+        </div>
+      }
+    >
         <div className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2">
               {/* Revenue Timeseries */}
@@ -318,10 +312,9 @@ const SalesExplorer: React.FC = () => {
             </Card>
         </div>
         
-        {/* Scout AI Panel - Floating */}
-        <ScoutAIPanel data={data} />
-      </PageLayout>
-    </Layout>
+      {/* Scout AI Panel - Floating */}
+      <ScoutAIPanel data={data} />
+    </PageLayout>
   );
 };
 
