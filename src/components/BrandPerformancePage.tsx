@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TrendingUp, TrendingDown, Award, Target, BarChart3, Download, RefreshCw, Eye } from 'lucide-react';
 import { useRealTimeBrandPerformance, useRealTimeDashboardMetrics } from '@/hooks/useRealTimeData';
 import { COMPETITIVE_BENCHMARKS } from '@/config/staticData';
+import PageLayout from './PageLayout';
 
 const BrandPerformancePage = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('3months');
@@ -223,50 +224,44 @@ const BrandPerformancePage = () => {
   }
 
   return (
-    <div className="space-y-6">
-        {/* Page Header - Consistent with Layout system */}
-        <div className="mb-6">
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-                <Award className="w-6 h-6 mr-2 text-blue-600" />
-                Brand Performance Analytics
-              </h1>
-              <p className="mt-2 text-sm text-gray-700">
-                Comprehensive TBWA vs competitors analysis with real-time data
-              </p>
-            </div>
-            <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-              <div className="flex items-center space-x-3">
-                <select
-                  value={selectedPeriod}
-                  onChange={(e) => setSelectedPeriod(e.target.value)}
-                  className="rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                >
-                  <option value="1month">Last Month</option>
-                  <option value="3months">Last 3 Months</option>
-                  <option value="6months">Last 6 Months</option>
-                  <option value="1year">Last Year</option>
-                </select>
-                <button 
-                  onClick={() => refreshBrands()}
-                  disabled={loading}
-                  className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50"
-                >
-                  <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
-                  Refresh
-                </button>
-                <button 
-                  onClick={exportData}
-                  className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Export
-                </button>
-              </div>
-            </div>
-          </div>
+    <PageLayout 
+      title={
+        <div className="flex items-center">
+          <Award className="w-6 h-6 mr-2 text-blue-600" />
+          Brand Performance Analytics
         </div>
+      }
+      description="Comprehensive TBWA vs competitors analysis with real-time data"
+      actions={
+        <div className="flex items-center space-x-3">
+          <select
+            value={selectedPeriod}
+            onChange={(e) => setSelectedPeriod(e.target.value)}
+            className="rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="1month">Last Month</option>
+            <option value="3months">Last 3 Months</option>
+            <option value="6months">Last 6 Months</option>
+            <option value="1year">Last Year</option>
+          </select>
+          <button 
+            onClick={() => refreshBrands()}
+            disabled={loading}
+            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:opacity-50"
+          >
+            <RefreshCw className={`w-4 h-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
+            Refresh
+          </button>
+          <button 
+            onClick={exportData}
+            className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export
+          </button>
+        </div>
+      }
+    >
 
         {/* Key Performance Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -473,7 +468,7 @@ const BrandPerformancePage = () => {
             </div>
           </div>
         </div>
-    </div>
+    </PageLayout>
   );
 };
 

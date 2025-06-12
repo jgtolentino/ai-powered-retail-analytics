@@ -7,6 +7,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Brain, TrendingUp, Target, AlertTriangle, Lightbulb, BarChart3, Users, ShoppingCart, Calendar, Zap } from 'lucide-react';
 import { useRealTimeBrandPerformance, useRealTimeBasketMetrics } from '@/hooks/useRealTimeData';
 import { monitoringService } from '@/services/monitoring/MonitoringService';
+import PageLayout from '../PageLayout';
 
 interface AIInsight {
   id: string;
@@ -494,34 +495,28 @@ export const AdvancedAIInsights: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Page Header - Consistent with Layout system */}
-      <div className="mb-6">
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 flex items-center">
-              <Brain className="w-6 h-6 mr-2 text-purple-600" />
-              AI Assistant
-              <span className="ml-3 text-sm bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
-                ML Powered
-              </span>
-            </h1>
-            <p className="mt-2 text-sm text-gray-700">
-              Advanced AI analysis with predictive modeling and competitive intelligence
-            </p>
-          </div>
-          <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-            <button
-              onClick={runAdvancedAnalysis}
-              disabled={isAnalyzing}
-              className="inline-flex items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 disabled:opacity-50"
-            >
-              <Zap className={`w-4 h-4 mr-2 ${isAnalyzing ? 'animate-pulse' : ''}`} />
-              {isAnalyzing ? 'Analyzing...' : 'Refresh Analysis'}
-            </button>
-          </div>
+    <PageLayout 
+      title={
+        <div className="flex items-center">
+          <Brain className="w-6 h-6 mr-2 text-purple-600" />
+          AI Assistant
+          <span className="ml-3 text-sm bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
+            ML Powered
+          </span>
         </div>
-      </div>
+      }
+      description="Advanced AI analysis with predictive modeling and competitive intelligence"
+      actions={
+        <button
+          onClick={runAdvancedAnalysis}
+          disabled={isAnalyzing}
+          className="inline-flex items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-600 disabled:opacity-50"
+        >
+          <Zap className={`w-4 h-4 mr-2 ${isAnalyzing ? 'animate-pulse' : ''}`} />
+          {isAnalyzing ? 'Analyzing...' : 'Refresh Analysis'}
+        </button>
+      }
+    >
 
       {/* AI Performance Header */}
       <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border p-6">
@@ -707,7 +702,7 @@ export const AdvancedAIInsights: React.FC = () => {
           </button>
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 };
 
