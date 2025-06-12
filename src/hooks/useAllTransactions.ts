@@ -2,13 +2,8 @@
 // SOLUTION 6: React Hook for Data Fetching
 // ========================================
 
-import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-// Use direct client to bypass enhanced client limits
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://lcoxtanyckjzyxxcsjzz.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjb3h0YW55Y2tqenl4eGNzanp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNDUzMjcsImV4cCI6MjA2MzkyMTMyN30.W2JgvZdXubvWpKCNZ7TfjLiKANZO1Hlb164fBEKH2dA';
-const supabase = createClient(supabaseUrl, supabaseKey);
+import { useState, useEffect, useRef } from 'react';
+import { supabase } from '../lib/supabaseClient';
 
 export interface Transaction {
   id?: number;
@@ -24,10 +19,15 @@ const useAllTransactions = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    // Prevent multiple concurrent fetches
+    if (hasFetched.current) return;
+    
     const fetchAllData = async () => {
       console.log('🚀 useAllTransactions: Starting data fetch...');
+      hasFetched.current = true;
       setLoading(true);
       setError(null);
       setProgress(0);
@@ -76,6 +76,7 @@ const useAllTransactions = () => {
       } catch (err: any) {
         console.error('❌ Error loading transactions:', err);
         setError(err.message || 'Failed to load transactions');
+        hasFetched.current = false; // Allow retry on error
       } finally {
         setLoading(false);
       }

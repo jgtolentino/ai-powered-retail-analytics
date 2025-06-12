@@ -8,4 +8,11 @@ if (!supabaseUrl || !supabaseKey) {
   throw new Error('🚨 Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+// Single instance to prevent multiple GoTrueClient warnings
+export const supabase = createClient(supabaseUrl, supabaseKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: false
+  }
+})

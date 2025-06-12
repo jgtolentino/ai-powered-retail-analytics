@@ -18,6 +18,16 @@ export default {
       },
     },
     extend: {
+      fontSize: {
+        'xs': ['clamp(0.75rem, 0.7vw + 0.4rem, 0.875rem)', { lineHeight: '1.4' }],
+        'sm': ['clamp(0.875rem, 0.8vw + 0.45rem, 1rem)', { lineHeight: '1.4' }],
+        'base': ['clamp(0.875rem, 0.9vw + 0.5rem, 1.125rem)', { lineHeight: '1.4' }],
+        'lg': ['clamp(1rem, 1.1vw + 0.6rem, 1.35rem)', { lineHeight: '1.4' }],
+        'xl': ['clamp(1.125rem, 1.3vw + 0.7rem, 1.5rem)', { lineHeight: '1.3' }],
+        '2xl': ['clamp(1.25rem, 1.5vw + 0.8rem, 1.75rem)', { lineHeight: '1.3' }],
+        '3xl': ['clamp(1.5rem, 2vw + 1rem, 2.25rem)', { lineHeight: '1.2' }],
+        '4xl': ['clamp(1.875rem, 2.5vw + 1.2rem, 2.75rem)', { lineHeight: '1.2' }],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -68,7 +78,7 @@ export default {
           to: { height: '0' },
         },
         'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '0%': { opacity: '0', transform: 'translateY(0.625rem)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'slide-in': {

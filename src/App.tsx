@@ -7,12 +7,7 @@ import OverviewPage from './components/OverviewPage'
 import SalesExplorer from './pages/SalesExplorer'
 import BasketAnalysis from './components/BasketAnalysis'
 import ConsumerInsights from './components/ConsumerInsights'
-import DeviceHealth from './components/DeviceHealth'
 import DemoPage from './components/DemoPage'
-import AIGenie from './components/AIGenie'
-import AIAssistantPage from './components/AIAssistantPage'
-import BrandPerformancePage from './components/BrandPerformancePage'
-import AIRecommendationsPage from './pages/AIRecommendations'
 import Layout from './components/Layout'
 import { Toaster } from 'sonner'
 
@@ -36,40 +31,35 @@ function App() {
       >
         <div className="min-h-screen bg-background">
           <Routes>
-            <Route path="/" element={<OverviewPage />} />
+            <Route path="/" element={
+              <Layout>
+                <OverviewPage />
+              </Layout>
+            } />
             <Route path="/demo" element={<DemoPage />} />
-            <Route path="/overview" element={<OverviewPage />} />
+            <Route path="/overview" element={
+              <Layout>
+                <OverviewPage />
+              </Layout>
+            } />
             <Route path="/sales-explorer" element={
               <Layout>
                 <SalesExplorer />
               </Layout>
             } />
-            <Route path="/basket-analysis" element={<BasketAnalysis />} />
-            <Route path="/consumer-insights" element={<ConsumerInsights />} />
-            <Route path="/device-health" element={<DeviceHealth />} />
+            <Route path="/basket-analysis" element={
+              <Layout>
+                <BasketAnalysis />
+              </Layout>
+            } />
+            <Route path="/consumer-insights" element={
+              <Layout>
+                <ConsumerInsights />
+              </Layout>
+            } />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/scout" element={<ScoutDashboard />} />
             <Route path="/scout-enhanced" element={<EnhancedScoutDashboard />} />
-            <Route path="/ai-genie" element={
-              <Layout>
-                <AIAssistantPage />
-              </Layout>
-            } />
-            <Route path="/ai-recommendations" element={
-              <Layout>
-                <AIRecommendationsPage />
-              </Layout>
-            } />
-            <Route path="/ai-assistant" element={
-              <Layout>
-                <AIAssistantPage />
-              </Layout>
-            } />
-            <Route path="/brand-performance" element={
-              <Layout>
-                <BrandPerformancePage />
-              </Layout>
-            } />
             <Route path="/analytics" element={
               <Layout>
                 <div className="text-center py-20">

@@ -50,26 +50,38 @@
 }
 
 @layer base {
+  /* Fluid typography foundation */
+  html {
+    font-size: clamp(14px, 0.9vw + 0.5rem, 18px); /* fluid but bounded */
+  }
+  
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Fluid images and media */
+  img, canvas, svg, video {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
-/* Custom animations */
+/* Custom animations - fluid units */
 @keyframes shimmer {
   0% {
-    background-position: -200px 0;
+    background-position: -20vw 0;
   }
   100% {
-    background-position: calc(200px + 100%) 0;
+    background-position: calc(20vw + 100%) 0;
   }
 }
 
 .shimmer {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200px 100%;
+  background-size: 20vw 100%;
   animation: shimmer 1.5s infinite;
 }

@@ -1,0 +1,275 @@
+diff --git a/src/config/navGroups.ts b/src/config/navGroups.ts
+new file mode 100644
+index 0000000..a1b2c3d
+--- /dev/null
++++ b/src/config/navGroups.ts
+@@ -0,0 +1,32 @@
++export interface NavItem {
++  title: string;
++  path: string;
++  subtitle?: string;
++  badge?: string;
++}
++
++export interface NavGroup {
++  title: string;
++  items: NavItem[];
++}
++
++export const navGroups: NavGroup[] = [
++  {
++    title: 'Analytics',
++    items: [
++      { title: 'Overview',          subtitle: 'Daily pulse & KPIs',      path: '/overview' },
++      { title: 'Sales Explorer',    subtitle: 'Transaction analysis',    path: '/sales-explorer' },
++      { title: 'Basket Analysis',   subtitle: 'Purchase patterns',       path: '/basket-analysis' },
++      { title: 'Consumer Insights', subtitle: 'Demographics & behavior', path: '/consumer-insights' },
++      { title: 'Device Health',     subtitle: 'Edge device monitoring',  path: '/device-health' },
++      { title: 'Brand Performance', subtitle: 'TBWA vs competitors',     path: '/brand-performance' },
++      { title: 'AI Console',        subtitle: 'Comprehensive workspace', badge: 'PRO', path: '/ai-genie' },
++    ],
++  },
++  {
++    title: 'Administration',
++    items: [
++      { title: 'System Logs', subtitle: 'Operations & audit', path: '/system-logs' },
++    ],
++  },
++];
+diff --git a/src/config/navLinks.ts b/src/config/navLinks.ts
+deleted file mode 100644
+index d1e2f3g..0000000
+--- a/src/config/navLinks.ts
++++ /dev/null
+@@ -1,12 +0,0 @@
+-export const navLinks = [
+-  { title: 'Overview',         path: '/overview' },
+-  { title: 'Sales Explorer',   path: '/sales-explorer' },
+-  { title: 'Basket Analysis',  path: '/basket-analysis' },
+-  { title: 'Consumer Insights',path: '/consumer-insights' },
+-  { title: 'Device Health',    path: '/device-health' },
+-  { title: 'Brand Performance',path: '/brand-performance' },
+-  { title: 'AI Console',       path: '/ai-genie' },
+-  { title: 'System Logs',      path: '/logs' },
+-];
+-
+-export type NavItem = typeof navLinks[number];
+diff --git a/src/components/Sidebar.tsx b/src/components/Sidebar.tsx
+new file mode 100644
+index 0000000..h4i5j6k
+--- /dev/null
++++ b/src/components/Sidebar.tsx
+@@ -0,0 +1,37 @@
++import { NavLink } from 'react-router-dom';
++import { navGroups, NavItem } from '@/config/navGroups';
++
++export default function Sidebar() {
++  return (
++    <aside className="w-72 shrink-0 border-r bg-gray-50 overflow-y-auto">
++      {navGroups.map((group) => (
++        <div key={group.title} className="px-4 py-3">
++          <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
++            {group.title}
++          </h4>
++
++          <nav className="flex flex-col gap-1">
++            {group.items.map((item: NavItem) => (
++              <NavLink
++                key={item.path}
++                to={item.path}
++                className={({ isActive }) =>
++                  [
++                    'flex items-start justify-between gap-2 rounded-md px-3 py-2 transition',
++                    isActive
++                      ? 'bg-indigo-600 text-white'
++                      : 'text-gray-800 hover:bg-gray-100',
++                  ].join(' ')
++                }
++              >
++                <span className="leading-tight">
++                  {item.title}
++                  {item.subtitle && (
++                    <span className="block text-xs text-gray-500">{item.subtitle}</span>
++                  )}
++                </span>
++
++                {item.badge && (
++                  <span className="mt-0.5 rounded bg-amber-400 px-1.5 py-0.5 text-[10px] font-bold text-black">
++                    {item.badge}
++                  </span>
++                )}
++              </NavLink>
++            ))}
++          </nav>
++        </div>
++      ))}
++    </aside>
++  );
++}
+diff --git a/src/components/Layout.tsx b/src/components/Layout.tsx
+index l7m8n9o..p1q2r3s 100644
+--- a/src/components/Layout.tsx
++++ b/src/components/Layout.tsx
+@@ -1,116 +1,49 @@
+ import { ReactNode } from 'react'
+-import { BarChart3, Bot, Home, Settings, TrendingUp, Users, Activity, ShoppingCart, Eye, Award, FileText } from 'lucide-react'
+-import { Link, useLocation } from 'react-router-dom'
+-import { cn } from '@/lib/utils'
+-import { navLinks } from '@/config/navLinks'
++import Sidebar from '@/components/Sidebar'
+ 
+ interface LayoutProps {
+   children: ReactNode
+ }
+ 
+ export default function Layout({ children }: LayoutProps) {
+-  const location = useLocation()
+-
+-  // Icon mapping for navigation items
+-  const iconMap: Record<string, any> = {
+-    'Overview': Home,
+-    'Sales Explorer': TrendingUp,
+-    'Basket Analysis': ShoppingCart,
+-    'Consumer Insights': Users,
+-    'Device Health': Activity,
+-    'Brand Performance': Award,
+-    'AI Console': Bot,
+-    'System Logs': FileText,
+-  }
+-
+-  const navigation = navLinks.map(link => ({
+-    name: link.title,
+-    href: link.path,
+-    icon: iconMap[link.title] || Home,
+-    badge: link.title === 'AI Console' ? 'AI' : undefined,
+-    divider: link.title === 'System Logs'
+-  }))
+-
+   return (
+-    <div className="min-h-screen bg-gray-50">
++    <div className="min-h-screen bg-gray-50 flex">
+       {/* Sidebar */}
+-      <div className="fixed inset-y-0 left-0 z-50 w-[18%] min-w-[12rem] lg:w-[15%] bg-white shadow-lg">
+-        <div className="flex h-16 items-center justify-center border-b border-gray-200">
+-          <div className="text-center">
+-            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+-              Analytics
+-            </h1>
+-            <p className="text-xs text-gray-500 mt-1">Retail Intelligence</p>
+-          </div>
+-        </div>
+-        <nav className="mt-6 px-3">
+-          <div className="space-y-1">
+-            {navigation.map((item) => {
+-              const isActive = location.pathname === item.href
+-              const Icon = item.icon
+-              return (
+-                <div key={item.name}>
+-                  {item.divider && <div className="border-t border-gray-200 my-4" />}
+-                  <Link
+-                    to={item.href}
+-                    className={cn(
+-                      'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors',
+-                      isActive
+-                        ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-600'
+-                        : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+-                    )}
+-                  >
+-                    <Icon className={cn(
+-                      'mr-3 h-5 w-5 flex-shrink-0',
+-                      isActive ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-500'
+-                    )} />
+-                    <span className="flex-1">{item.name}</span>
+-                    {item.badge && (
+-                      <span className="ml-2 px-2 py-1 text-xs bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full">
+-                        {item.badge}
+-                      </span>
+-                    )}
+-                  </Link>
+-                </div>
+-              )
+-            })}
++      <Sidebar />
++
++      {/* Main content */}
++      <div className="flex-1">
++        {/* Top header */}
++        <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
++          <div className="flex h-16 items-center justify-between px-6">
++            <div className="flex items-center space-x-4">
++              <h2 className="text-lg font-semibold text-gray-900">
++                Retail Analytics
++              </h2>
++              <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
++                Philippine Market
++              </span>
++            </div>
++            <div className="flex items-center space-x-3">
++              <div className="text-sm text-gray-500">
++                {new Date().toLocaleDateString('en-US', { 
++                  weekday: 'short', 
++                  month: 'short', 
++                  day: 'numeric' 
++                })}
++              </div>
++              <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-medium">
++                A
++              </div>
++            </div>
+           </div>
+-        </nav>
+-      </div>
++        </header>
+ 
+-      {/* Main content */}
+-      <div className="pl-[18%] lg:pl-[15%]" style={{ minPaddingLeft: '12rem' }}>
+-        {/* Top header */}
+-        <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+-          <div className="flex h-16 items-center justify-between px-6">
+-            <div className="flex items-center space-x-4">
+-              <h2 className="text-lg font-semibold text-gray-900">
+-                Retail Analytics
+-              </h2>
+-              <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+-                Philippine Market
+-              </span>
+-            </div>
+-            <div className="flex items-center space-x-3">
+-              <div className="text-sm text-gray-500">
+-                {new Date().toLocaleDateString('en-US', { 
+-                  weekday: 'short', 
+-                  month: 'short', 
+-                  day: 'numeric' 
+-                })}
+-              </div>
+-              <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-medium">
+-                A
+-              </div>
+-            </div>
+-          </div>
+-        </header>
+-
+-        {/* Page content */}
+-        <main className="p-6 md:p-8 lg:p-10">
+-          {children}
+-        </main>
++        {/* Page content */}
++        <main className="p-6 md:p-8 lg:p-10">
++          {children}
++        </main>
+       </div>
+     </div>
+   )
+ }
+diff --git a/src/App.tsx b/src/App.tsx
+index t4u5v6w..x7y8z9a 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -10,7 +10,6 @@ import ConsumerInsights from './components/ConsumerInsights'
+ import DeviceHealth from './components/DeviceHealth'
+ import DemoPage from './components/DemoPage'
+ import AIAssistantPage from './components/AIAssistantPage'
+-import BrandPerformancePage from './components/BrandPerformancePage'
+ import BrandPerformance from './pages/BrandPerformance'
+ import AIRecommendationsPage from './pages/AIRecommendations'
+ import Layout from './components/Layout'
