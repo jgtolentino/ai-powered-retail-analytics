@@ -11,7 +11,15 @@ import useAllTransactions from '../hooks/useAllTransactions';
 import { Store, Sparkles } from 'lucide-react';
 
 const OverviewPage: React.FC = () => {
-  const { data } = useAllTransactions();
+  const { transactions, loading } = useAllTransactions();
+  
+  // Transform to match expected data structure for ScoutAIPanel
+  const data = transactions.length > 0 ? {
+    transactions,
+    brands: [],
+    products: [],
+    transactionItems: []
+  } : null;
   
   return (
     <FilterProvider>

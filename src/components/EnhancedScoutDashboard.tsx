@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { useEnhancedFiltering } from '../hooks/useEnhancedFiltering';
 import { EnhancedScoutPanel } from './enhanced/EnhancedScoutPanelFixed';
 import { AIInsightsOverlay } from './ai/AIInsightsOverlay';
+import ScoutAIPanel from './scout/ScoutAIPanel';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase/client';
 import { FilterPersistence } from '../utils/filterPersistence';
@@ -470,6 +471,9 @@ export const EnhancedScoutDashboard: React.FC = () => {
         dashboardData={dashboardData}
         filters={filters}
       />
+
+      {/* Scout AI Panel - Floating */}
+      <ScoutAIPanel data={dashboardData} />
     </div>
   );
 };

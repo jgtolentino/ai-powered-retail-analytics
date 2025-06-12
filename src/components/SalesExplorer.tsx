@@ -10,7 +10,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const SalesExplorer: React.FC = () => {
-  const { transactions, loading, error, data } = useAllTransactions();
+  const { transactions, loading, error } = useAllTransactions();
+  
+  // Transform to match expected data structure for ScoutAIPanel
+  const data = transactions.length > 0 ? {
+    transactions,
+    brands: [],
+    products: [],
+    transactionItems: []
+  } : null;
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<'created_at' | 'total_amount'>('created_at');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
