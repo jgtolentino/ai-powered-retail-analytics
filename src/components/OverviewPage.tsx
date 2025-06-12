@@ -6,6 +6,7 @@ import KPICards from './retail/overview/KPICards';
 import DailyTrendsHeatmap from './retail/overview/DailyTrendsHeatmap';
 import BasketSummary from './retail/overview/BasketSummary';
 import BrandPerformance from './retail/overview/BrandPerformance';
+import ConsumerProfile from './retail/overview/ConsumerProfile';
 import ScoutAIPanel from './scout/ScoutAIPanel';
 import useAllTransactions from '../hooks/useAllTransactions';
 import { Store, Sparkles } from 'lucide-react';
@@ -81,13 +82,8 @@ const OverviewPage: React.FC = () => {
               {/* Brand Performance */}
               <BrandPerformance />
               
-              {/* Placeholder for Consumer Profile */}
-              <div className="bg-white rounded-lg border p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Consumer Profile</h3>
-                <div className="text-center text-gray-500 py-8">
-                  Widget coming soon...
-                </div>
-              </div>
+              {/* Consumer Profile */}
+              <ConsumerProfile />
             </section>
           </div>
         </div>
