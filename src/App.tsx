@@ -38,11 +38,7 @@ function App() {
             <Route path="/" element={<OverviewPage />} />
             <Route path="/demo" element={<DemoPage />} />
             <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/sales-explorer" element={
-              <Layout>
-                <SalesExplorer />
-              </Layout>
-            } />
+            <Route path="/sales-explorer" element={<SalesExplorer />} />
             <Route path="/basket-analysis" element={<BasketAnalysis />} />
             <Route path="/consumer-insights" element={<ConsumerInsights />} />
             <Route path="/device-health" element={<DeviceHealth />} />
