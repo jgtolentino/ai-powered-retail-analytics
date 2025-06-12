@@ -1,6 +1,5 @@
 // src/pages/SalesExplorer.tsx
 import React, { useState, useMemo } from 'react'
-import Layout from '../components/Layout'
 import PageLayout from '../components/PageLayout'
 import useAllTransactions, { Transaction } from '../hooks/useAllTransactions'
 import ScoutAIPanel from '../components/scout/ScoutAIPanel'
@@ -93,53 +92,50 @@ export default function SalesExplorer() {
 
   if (loading || error) {
     return (
-      <Layout>
-        <PageLayout 
-          title="Sales Explorer" 
-          description={loading ? 'Loading transaction data...' : 'Error loading data'}
-        >
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <TrendingUp className={`h-12 w-12 mx-auto mb-4 ${error ? 'text-red-400' : 'text-gray-400'}`} />
-              <div className={`text-lg ${error ? 'text-red-600' : 'text-gray-600'}`}>
-                {loading ? 'Loading sales data...' : 'Error Loading Sales Data'}
-              </div>
-              <div className={`text-sm mt-2 ${error ? 'text-red-500' : 'text-gray-500'}`}>
-                {loading ? `Processing ${transactions.length} transactions...` : 'Unable to process transaction data'}
-              </div>
+      <PageLayout 
+        title="Sales Explorer" 
+        description={loading ? 'Loading transaction data...' : 'Error loading data'}
+      >
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <TrendingUp className={`h-12 w-12 mx-auto mb-4 ${error ? 'text-red-400' : 'text-gray-400'}`} />
+            <div className={`text-lg ${error ? 'text-red-600' : 'text-gray-600'}`}>
+              {loading ? 'Loading sales data...' : 'Error Loading Sales Data'}
+            </div>
+            <div className={`text-sm mt-2 ${error ? 'text-red-500' : 'text-gray-500'}`}>
+              {loading ? `Processing ${transactions.length} transactions...` : 'Unable to process transaction data'}
             </div>
           </div>
-        </PageLayout>
-      </Layout>
+        </div>
+      </PageLayout>
     )
   }
 
   return (
-    <Layout>
-      <PageLayout
-        title={
-          <div className="flex items-center gap-3">
-            <TrendingUp className="h-8 w-8 text-blue-600" />
-            Sales Explorer
-            <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
-              {transactions.length.toLocaleString()} transactions
-            </span>
-          </div>
-        }
-        description="Transaction analysis and drill-down"
-        actions={
-          <div className="flex gap-3">
-            <Button variant="outline" size="sm">
-              <RefreshCw className="w-4 h-4 mr-2" />
-              Refresh
-            </Button>
-            <Button variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
-          </div>
-        }
-      >
+    <PageLayout
+      title={
+        <div className="flex items-center gap-3">
+          <TrendingUp className="h-8 w-8 text-blue-600" />
+          Sales Explorer
+          <span className="ml-2 text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">
+            {transactions.length.toLocaleString()} transactions
+          </span>
+        </div>
+      }
+      description="Transaction analysis and drill-down"
+      actions={
+        <div className="flex gap-3">
+          <Button variant="outline" size="sm">
+            <RefreshCw className="w-4 h-4 mr-2" />
+            Refresh
+          </Button>
+          <Button variant="outline" size="sm">
+            <Download className="w-4 h-4 mr-2" />
+            Export
+          </Button>
+        </div>
+      }
+    >
       <div className="space-y-6">
         <div className="grid gap-6 md:grid-cols-2">
           {/* Revenue Timeseries */}
@@ -295,9 +291,8 @@ export default function SalesExplorer() {
         </Card>
       </div>
       
-        {/* Scout AI Panel - Floating */}
-        <ScoutAIPanel data={data} />
-      </PageLayout>
-    </Layout>
+      {/* Scout AI Panel - Floating */}
+      <ScoutAIPanel data={data} />
+    </PageLayout>
   )
 }
