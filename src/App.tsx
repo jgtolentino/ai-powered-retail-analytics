@@ -4,7 +4,7 @@ import Dashboard from './components/Dashboard'
 import ScoutDashboard from './components/ScoutDashboard'
 import EnhancedScoutDashboard from './components/EnhancedScoutDashboard'
 import OverviewPage from './components/OverviewPage'
-import SalesExplorer from './components/SalesExplorer'
+import SalesExplorer from './pages/SalesExplorer'
 import BasketAnalysis from './components/BasketAnalysis'
 import ConsumerInsights from './components/ConsumerInsights'
 import DeviceHealth from './components/DeviceHealth'
@@ -38,11 +38,7 @@ function App() {
             <Route path="/" element={<OverviewPage />} />
             <Route path="/demo" element={<DemoPage />} />
             <Route path="/overview" element={<OverviewPage />} />
-            <Route path="/sales-explorer" element={
-              <Layout>
-                <SalesExplorer />
-              </Layout>
-            } />
+            <Route path="/sales-explorer" element={<SalesExplorer />} />
             <Route path="/basket-analysis" element={<BasketAnalysis />} />
             <Route path="/consumer-insights" element={<ConsumerInsights />} />
             <Route path="/device-health" element={<DeviceHealth />} />
