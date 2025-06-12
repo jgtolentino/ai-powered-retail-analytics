@@ -50,7 +50,11 @@ function App() {
                 <AIGenie />
               </Layout>
             } />
-            <Route path="/ai-assistant" element={<AIAssistantPage />} />
+            <Route path="/ai-assistant" element={
+              <Layout>
+                <AIAssistantPage />
+              </Layout>
+            } />
             <Route path="/brand-performance" element={
               <Layout>
                 <BrandPerformancePage />
