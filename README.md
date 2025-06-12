@@ -1,338 +1,152 @@
-# 🎯 AI-Powered Retail Analytics Platform
+# RetailBot - AI-Powered Retail Analytics Platform
 
-Enterprise-grade AI-powered retail analytics platform with **Scout AI Chatbot** and Azure OpenAI integration for the Philippine market.
+> Enterprise-grade retail analytics with AI-powered insights for the Philippine market
 
-## 🤖 Scout AI Chatbot Features
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://vercel.com) [![TypeScript](https://img.shields.io/badge/TypeScript-4.x-blue)](https://www.typescriptlang.org/) [![React](https://img.shields.io/badge/React-18.x-blue)](https://reactjs.org/) [![Azure OpenAI](https://img.shields.io/badge/Azure_OpenAI-integrated-orange)](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service)
 
-- **🎯 Draggable Interface** - Move the AI assistant anywhere on screen
-- **👁️ Hide/Show Controls** - Complete visibility management with bottom corner toggle
-- **📊 Real-time Analysis** - Contextual insights from 18K+ transactions
-- **🏷️ Brand Intelligence** - TBWA vs competitor performance analysis
-- **🌏 Philippine Market Focus** - Regional trends and consumer behavior patterns
-- **💬 Natural Language** - Ask questions about retail data in plain English
+## 🎯 Overview
 
-### Available on Pages:
-- `/overview` - Main dashboard with KPIs and insights
-- `/sales-explorer` - Transaction analysis and search
-- `/scout` - Advanced 4-panel analytics view
+RetailBot is a comprehensive analytics platform designed for Philippine sari-sari stores and retail operations. It provides AI-powered insights, real-time transaction analysis, and competitive intelligence through an intuitive dashboard interface.
 
-## 🚀 Master Deployment Plan - Quick Start
+### Key Features
 
-This project follows the **Complete Integration Guide** with a **4.5-hour deployment timeline** to achieve an enterprise-grade AI-powered retail analytics platform.
+- **📊 Real-time Analytics** - Live dashboard with 18K+ transaction insights
+- **🤖 AI Assistant Console** - Natural language queries with Azure OpenAI
+- **🏪 Brand Performance** - TBWA vs competitor analysis
+- **📱 Mobile-Optimized** - Responsive design for all devices
+- **🌏 Philippine Market** - Localized for sari-sari store operations
 
-### 📋 Deployment Artifacts & Timeline
-
-| **Phase** | **Artifact** | **Duration** | **Status** |
-|-----------|--------------|--------------|------------|
-| **Foundation** | Database Setup SQL | 30 min | ✅ Ready |
-| **AI Integration** | Azure OpenAI Implementation | 90 min | ✅ Ready |
-| **UI Enhancement** | UI Templates + Components | 90 min | ✅ Ready |
-| **Integration** | Component Extraction Guide | 45 min | ✅ Ready |
-| **Production** | Deployment Checklist | 15 min | ✅ Ready |
-
-**TOTAL TIME: 4.5 hours** → **Enterprise-grade AI platform**
-
----
-
-## 🔥 Quick Start (5 minutes)
+## 🚀 Quick Start
 
 ```bash
-# 1. Clone and setup
-git clone <your-repo-url>
+# Clone the repository
+git clone https://github.com/jgtolentino/ai-powered-retail-analytics.git
 cd ai-powered-retail-analytics
+
+# Install dependencies
 npm install
 
-# 2. Environment setup
-cp .env.example .env
-# Fill in your Azure OpenAI and Supabase credentials
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your credentials
 
-# 3. Start development
+# Start development server
 npm run dev
-
-# 4. Test Azure OpenAI integration
-npm run test:azure
 ```
 
----
+Visit `http://localhost:5173` to see the application.
 
-## 📊 What You Get
+## 🏗️ Project Structure
 
-### **🔷 Enterprise AI Assistant**
-- Azure OpenAI GPT-4 integration
-- Natural language data queries
-- Conversational analytics interface
+```
+src/
+├── components/          # React components
+│   ├── Layout.tsx      # Main layout with sidebar navigation
+│   ├── PageLayout.tsx  # Consistent page header component
+│   ├── ai/            # AI-related components
+│   └── shared/        # Reusable UI components
+├── hooks/             # Custom React hooks
+├── services/          # API and data services
+├── config/            # Configuration files
+└── styles/           # CSS and styling
+```
 
-### **🎨 Professional UI**
-- Cruip Mosaic templates
-- StockBot-style interactive charts
-- Mobile-responsive design
+## 📚 Documentation
 
-### **📈 Advanced Analytics**
-- Real-time retail insights
-- 18K+ records with live updates
-- Philippine market context
+- [Architecture Overview](docs/ARCHITECTURE.md)
+- [Development Guide](docs/DEVELOPMENT.md)
+- [Deployment Guide](docs/DEPLOYMENT.md)
+- [API Reference](docs/API.md)
 
-### **🚀 Production Ready**
-- Enterprise-grade deployment
-- Automatic testing pipeline
-- Performance optimized
+## 🔧 Development
 
----
+### Prerequisites
 
-## 🛠️ Complete Setup Guide
+- Node.js 18+ 
+- npm 8+
+- Azure OpenAI access (optional for AI features)
+- Supabase account (for data storage)
 
-### **Phase 1: Foundation Setup (30 minutes)**
+### Scripts
 
-#### 1.1 Database Configuration
 ```bash
-# Create Supabase project at https://supabase.com
-# Copy your project URL and anon key to .env
-
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+npm run dev        # Start development server
+npm run build      # Build for production
+npm run preview    # Preview production build
+npm run lint       # Run ESLint
+npm run test       # Run tests
+npm run verify     # Run all checks (lint + test + build)
 ```
 
-#### 1.2 Load Sample Data
-```sql
--- Execute in Supabase SQL Editor
--- Use the Complete Database Setup SQL (Artifact #2)
--- This creates schema + loads 18K records
+### Environment Variables
+
+Required environment variables:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_key
+VITE_AZURE_OPENAI_ENDPOINT=your_azure_endpoint
+VITE_AZURE_OPENAI_API_KEY=your_azure_key
 ```
 
-### **Phase 2: Azure OpenAI Setup (90 minutes)**
+## 🎨 UI Components
 
-#### 2.1 Create Azure Resources
+The application uses a unified layout system:
+
+- **Layout Component**: Provides sidebar navigation and main content area
+- **PageLayout Component**: Standardized page headers with title/description/actions
+- **Consistent Navigation**: Grouped sections (Analytics, Administration)
+
+## 🤖 AI Features
+
+- **AI Console**: Comprehensive analytics workspace with conversation history
+- **Natural Language Queries**: Ask questions about sales, customers, and trends
+- **Predictive Insights**: ML-powered recommendations and forecasts
+- **Export Capabilities**: Download analysis results and conversation logs
+
+## 🚀 Deployment
+
+The application is configured for Vercel deployment:
+
 ```bash
-# Run the automated setup script
-chmod +x scripts/azure-openai-setup.sh
-./scripts/azure-openai-setup.sh
-```
-
-#### 2.2 Configure Environment
-```bash
-# Add to your .env file
-AZURE_RESOURCE_NAME=your-retail-genie-openai
-AZURE_OPENAI_API_KEY=your-32-character-key
-AZURE_API_VERSION=2024-02-01
-AZURE_DEPLOYMENT_NAME=gpt-4
-```
-
-#### 2.3 Test Integration
-```bash
-npm run test:azure
-```
-
-### **Phase 3: UI Enhancement (90 minutes)**
-
-#### 3.1 Extract UI Components
-```bash
-# Run component extraction script
-chmod +x scripts/component-extraction.sh
-./scripts/component-extraction.sh
-```
-
-#### 3.2 Install UI Dependencies
-```bash
-npm install @radix-ui/react-select @radix-ui/react-dialog framer-motion
-```
-
-### **Phase 4: Production Deployment (15 minutes)**
-
-#### 4.1 Build and Deploy
-```bash
-# Verify everything works
-npm run verify
-
-# Deploy to Vercel
-npm run deploy
-```
-
----
-
-## 🧪 Testing & Validation
-
-### **Test Commands**
-```bash
-npm run test           # Run test suite
-npm run test:azure     # Test Azure OpenAI connection
-npm run lint           # Code quality check
-npm run verify         # Complete validation
-```
-
-### **Success Criteria**
-- [ ] Dashboard loads < 2 seconds
-- [ ] AI Genie responds < 3 seconds  
-- [ ] Charts interactive and responsive
-- [ ] Mobile design works perfectly
-- [ ] All API endpoints functional
-
----
-
-## 📁 Project Structure
-
-```
-ai-powered-retail-analytics/
-├── src/
-│   ├── components/
-│   │   ├── ui-templates/          # Cruip UI components
-│   │   ├── visualizations/        # StockBot charts
-│   │   └── retail-genie/          # AI interface
-│   ├── lib/
-│   │   ├── azure-openai/          # Azure OpenAI client
-│   │   └── databricks/            # Analytics integration
-│   └── hooks/
-│       └── ai-genie/              # AI-specific hooks
-├── databricks/notebooks/          # Analytics notebooks
-├── scripts/                       # Setup and deployment scripts
-└── .env.local                     # Configuration
-```
-
----
-
-## 🔧 Environment Variables
-
-### **Required Variables**
-```bash
-# Supabase (Database)
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
-
-# Azure OpenAI (AI Features)
-AZURE_RESOURCE_NAME=your-retail-genie-openai
-AZURE_OPENAI_API_KEY=your-32-character-key
-AZURE_API_VERSION=2024-02-01
-AZURE_DEPLOYMENT_NAME=gpt-4
-
-# Feature Flags
-VITE_ENABLE_AI_GENIE=true
-VITE_ENABLE_ANIMATIONS=true
-VITE_ENABLE_HEATMAPS=true
-```
-
-### **Optional Variables**
-```bash
-# Databricks (Advanced Analytics)
-DATABRICKS_HOST=https://your-workspace.databricks.com
-DATABRICKS_TOKEN=your-databricks-token
-
-# Development
-VITE_DEV_MODE=true
-VITE_LOG_LEVEL=info
-```
-
----
-
-## 🚀 Deployment Options
-
-### **Vercel (Recommended)**
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
+# Deploy to production
+npm run build
 vercel --prod
 ```
 
-### **Netlify**
+See [Deployment Guide](docs/DEPLOYMENT.md) for detailed instructions.
+
+## 🧪 Testing
+
 ```bash
-# Build and deploy
-npm run build
-# Upload dist/ folder to Netlify
+# Run unit tests
+npm run test
+
+# Run with coverage
+npm run test:coverage
+
+# Run end-to-end tests
+npm run test:e2e
 ```
 
-### **Azure Static Web Apps**
-```bash
-# Connect GitHub repo to Azure Static Web Apps
-# Automatic deployment on push
-```
+## 🤝 Contributing
 
----
-
-## 🎯 Features Overview
-
-### **✅ Current Features**
-- ✅ Modern React + TypeScript setup
-- ✅ Tailwind CSS + Radix UI components
-- ✅ Azure OpenAI integration ready
-- ✅ Supabase database integration
-- ✅ Responsive dashboard layout
-- ✅ Testing framework configured
-
-### **🔄 In Development**
-- 🔄 AI Genie conversational interface
-- 🔄 Advanced data visualizations
-- 🔄 Real-time analytics
-- 🔄 Mobile app integration
-
-### **📋 Planned Features**
-- 📋 Databricks AI Genie integration
-- 📋 Advanced forecasting models
-- 📋 Multi-tenant architecture
-- 📋 Advanced user management
-
----
-
-## 🔍 Troubleshooting
-
-### **Common Issues**
-
-#### Azure OpenAI Connection Failed
-```bash
-# Check environment variables
-echo $AZURE_OPENAI_API_KEY
-echo $AZURE_RESOURCE_NAME
-
-# Test connection
-npm run test:azure
-```
-
-#### Build Errors
-```bash
-# Clear cache and reinstall
-rm -rf node_modules package-lock.json
-npm install
-
-# Run type checking
-npm run lint
-```
-
-#### Database Connection Issues
-```bash
-# Verify Supabase credentials
-# Check RLS policies are disabled for development
-# Ensure API keys have correct permissions
-```
-
----
-
-## 📞 Support
-
-### **Documentation**
-- [Azure OpenAI Docs](https://docs.microsoft.com/azure/cognitive-services/openai/)
-- [Supabase Docs](https://supabase.com/docs)
-- [React + TypeScript Guide](https://react-typescript-cheatsheet.netlify.app/)
-
-### **Team Contact**
-- **Development Team**: dev@tbwa.com
-- **Technical Lead**: [Your Name]
-- **Project Manager**: [PM Name]
-
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- [Documentation](docs/)
+- [Issues](https://github.com/jgtolentino/ai-powered-retail-analytics/issues)
+- [Discussions](https://github.com/jgtolentino/ai-powered-retail-analytics/discussions)
 
 ---
 
-## 🎉 Congratulations!
-
-**You now have an enterprise-grade AI-powered retail analytics platform!**
-
-🔷 **Azure OpenAI Integration** → GPT-4 powered insights  
-🎨 **Professional UI** → Cruip + StockBot design  
-📊 **Real-time Analytics** → 18K+ records  
-🇵🇭 **Philippine Context** → Localized intelligence  
-🚀 **Production Ready** → Enterprise deployment  
-
-**Your AI-powered retail platform is ready to transform business intelligence!** 🚀✨
+Built with ❤️ for the Philippine retail market
