@@ -45,16 +45,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/scout" element={<ScoutDashboard />} />
             <Route path="/scout-enhanced" element={<EnhancedScoutDashboard />} />
-            <Route path="/ai-genie" element={
-              <Layout>
-                <AIGenie />
-              </Layout>
-            } />
-            <Route path="/ai-assistant" element={
-              <Layout>
-                <AIAssistantPage />
-              </Layout>
-            } />
+            <Route path="/ai-genie" element={<AIAssistantPage />} />
+            <Route path="/ai-assistant" element={<AIAssistantPage />} />
             <Route path="/brand-performance" element={
               <Layout>
                 <BrandPerformancePage />

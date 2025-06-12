@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, RefreshCw, Download, Minimize2, Maximize2 } from 'lucide-react';
-import PageLayout from './PageLayout';
 
 const AIAssistantPage = () => {
   const [messages, setMessages] = useState([
@@ -237,46 +236,50 @@ const AIAssistantPage = () => {
   ];
 
   return (
-    <PageLayout 
-      title={
-        <div className="flex items-center">
-          <Bot className="w-6 h-6 mr-2 text-blue-600" />
-          AI Assistant
-          <span className="ml-3 text-sm bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-            Console
-          </span>
+    <div className="min-h-screen bg-gray-50">
+      {/* Clean Header */}
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                RetailBot
+              </h1>
+              <span className="ml-4 text-sm text-gray-500">AI Assistant Console</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={clearChat}
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                title="Clear Chat"
+              >
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Clear
+              </button>
+              <button
+                onClick={exportChat}
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                title="Export Chat"
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export
+              </button>
+              <button
+                onClick={() => setIsMinimized(!isMinimized)}
+                className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+                title={isMinimized ? "Maximize" : "Minimize"}
+              >
+                {isMinimized ? <Maximize2 className="w-4 h-4 mr-2" /> : <Minimize2 className="w-4 h-4 mr-2" />}
+                {isMinimized ? "Expand" : "Minimize"}
+              </button>
+            </div>
+          </div>
         </div>
-      }
-      description="Comprehensive retail analytics workspace with detailed conversation history"
-      actions={
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={clearChat}
-            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            title="Clear Chat"
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Clear
-          </button>
-          <button
-            onClick={exportChat}
-            className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            title="Export Chat"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Export
-          </button>
-          <button
-            onClick={() => setIsMinimized(!isMinimized)}
-            className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            title={isMinimized ? "Maximize" : "Minimize"}
-          >
-            {isMinimized ? <Maximize2 className="w-4 h-4 mr-2" /> : <Minimize2 className="w-4 h-4 mr-2" />}
-            {isMinimized ? "Expand" : "Minimize"}
-          </button>
-        </div>
-      }
-    >
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="space-y-6">
 
         {!isMinimized && (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -426,7 +429,9 @@ const AIAssistantPage = () => {
             <p className="text-gray-600">Scout AI is minimized. Click maximize to continue chatting.</p>
           </div>
         )}
-    </PageLayout>
+        </div>
+      </main>
+    </div>
   );
 };
 
