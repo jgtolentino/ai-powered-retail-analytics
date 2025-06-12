@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabaseClient';
 import { dashboardCache, brandCache, transactionCache } from '../cache/CacheManager';
 import { dataValidator } from '../validation/DataValidator';
 import { errorHandler } from '../error/ErrorHandler';

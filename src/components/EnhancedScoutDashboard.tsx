@@ -6,7 +6,7 @@ import { EnhancedScoutPanel } from './enhanced/EnhancedScoutPanelFixed';
 import { AIInsightsOverlay } from './ai/AIInsightsOverlay';
 import ScoutAIPanel from './scout/ScoutAIPanel';
 import { useQuery } from '@tanstack/react-query';
-import { supabase } from '../lib/supabase/client';
+import { supabase } from '../lib/supabaseClient';
 import { FilterPersistence } from '../utils/filterPersistence';
 
 interface FilterBarProps {

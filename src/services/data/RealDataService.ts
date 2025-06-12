@@ -3,7 +3,7 @@
  * Implements Week 1: Critical brand & product data migration
  */
 
-import { supabase } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabaseClient';
 
 export interface BrandPerformanceData {
   name: string;

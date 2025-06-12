@@ -1,4 +1,4 @@
-import { supabase } from '../lib/supabase/client';
+import { supabase } from '../lib/supabaseClient';
 
 interface PerformanceTestResult {
   name: string;

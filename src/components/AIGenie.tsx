@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 import { Bot, Send, Loader2, Sparkles, TrendingUp, Users, Package } from 'lucide-react'
 import { callAzureOpenAI } from '@/lib/azure-openai/client'
-import { supabase } from '@/lib/supabase/client'
+import { supabase } from '@/lib/supabaseClient'
 
 interface Message {
   id: string

@@ -6,7 +6,7 @@ import {
   ShoppingCart, TrendingUp, Users, 
   Package, Bot, RefreshCw 
 } from 'lucide-react'
-import { supabase } from '@/lib/supabase/client'
+import { supabase } from '@/lib/supabaseClient'
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer

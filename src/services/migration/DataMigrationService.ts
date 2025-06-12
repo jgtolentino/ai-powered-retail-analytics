@@ -3,7 +3,7 @@
  * Handles safe migration from mock data to real database data
  */
 
-import { supabase } from '@/lib/supabase/client';
+import { supabase } from '@/lib/supabaseClient';
 import { dataValidator } from '../validation/DataValidator';
 import { errorHandler } from '../error/ErrorHandler';
 import { monitoringService } from '../monitoring/MonitoringService';
