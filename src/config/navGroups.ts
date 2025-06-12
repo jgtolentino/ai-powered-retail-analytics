@@ -14,10 +14,10 @@ export const navGroups: NavGroup[] = [
   {
     title: 'Analytics',
     items: [
-      { title: 'Overview',          subtitle: 'Daily pulse & KPIs',      path: '/overview' },
-      { title: 'Sales Explorer',    subtitle: 'Transaction analysis',    path: '/sales-explorer' },
-      { title: 'Basket Analysis',   subtitle: 'Purchase patterns',       path: '/basket-analysis' },
-      { title: 'Consumer Insights', subtitle: 'Demographics & behavior', path: '/consumer-insights' },
+      { title: 'Overview',            path: '/' },
+      { title: 'Transaction Trends',  path: '/transaction-trends' },
+      { title: 'Product Mix',         path: '/product-mix' },
+      { title: 'Consumer Behavior',   path: '/consumer-behavior' },
     ],
   },
 ];
