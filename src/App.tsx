@@ -51,7 +51,11 @@ function App() {
               </Layout>
             } />
             <Route path="/ai-assistant" element={<AIAssistantPage />} />
-            <Route path="/brand-performance" element={<BrandPerformancePage />} />
+            <Route path="/brand-performance" element={
+              <Layout>
+                <BrandPerformancePage />
+              </Layout>
+            } />
             <Route path="/analytics" element={
               <Layout>
                 <div className="text-center py-20">
