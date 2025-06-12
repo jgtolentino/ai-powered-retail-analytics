@@ -10,6 +10,7 @@ import ConsumerInsights from './components/ConsumerInsights'
 import DeviceHealth from './components/DeviceHealth'
 import DemoPage from './components/DemoPage'
 import AIGenie from './components/AIGenie'
+import AIAssistantPage from './components/AIAssistantPage'
 import Layout from './components/Layout'
 import { Toaster } from 'sonner'
 
@@ -48,6 +49,7 @@ function App() {
                 <AIGenie />
               </Layout>
             } />
+            <Route path="/ai-assistant" element={<AIAssistantPage />} />
             <Route path="/analytics" element={
               <Layout>
                 <div className="text-center py-20">
