@@ -12,6 +12,7 @@ import DemoPage from './components/DemoPage'
 import AIGenie from './components/AIGenie'
 import AIAssistantPage from './components/AIAssistantPage'
 import BrandPerformancePage from './components/BrandPerformancePage'
+import AIRecommendationsPage from './pages/AIRecommendations'
 import Layout from './components/Layout'
 import { Toaster } from 'sonner'
 
@@ -52,6 +53,11 @@ function App() {
             <Route path="/ai-genie" element={
               <Layout>
                 <AIAssistantPage />
+              </Layout>
+            } />
+            <Route path="/ai-recommendations" element={
+              <Layout>
+                <AIRecommendationsPage />
               </Layout>
             } />
             <Route path="/ai-assistant" element={
